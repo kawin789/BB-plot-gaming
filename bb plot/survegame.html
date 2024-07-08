@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gaming Project</title>
+    <style>
+        body {
+            background-image: url(./Assets/bg.jpg);
+            background-size: cover;
+            color: #ffa200;
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .content {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+            background: rgba(0, 0, 0, 0.6);
+            padding: 30px;
+            border-radius: 10px;
+        }
+
+        h1 {
+            font-size: 36px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            color: #ff8700;
+            transition: transform 0.5s;
+        }
+
+        .content p {
+            font-size: 18px;
+            font-weight: 300;
+            margin-bottom: 40px;
+            color: #ffa200;
+        }
+
+        a.button {
+            background-color: #ff8700;
+            border: none;
+            border-radius: 10px;
+            color: #fff;
+            display: inline-block;
+            font-size: 24px;
+            padding: 15px 30px;
+            text-decoration: none;
+            text-transform: uppercase;
+            transition: transform 0.3s, background-color 0.3s, box-shadow 0.3s;
+            position: relative;
+            z-index: 2;
+        }
+
+        a.button:hover {
+            background-color: #f9b43d;
+            transform: scale(1.1);
+            box-shadow: 0 0 15px #f9b43d;
+        }
+
+        .gestures {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .gesture {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            font-size: 24px;
+            perspective: 1000px;
+        }
+
+        .emoji {
+            font-size: 50px;
+            transition: transform 0.3s, color 0.3s;
+            position: relative;
+            z-index: 2;
+        }
+
+        .gesture:hover .emoji {
+            transform: rotateY(360deg) scale(1.2);
+            color: #ff8700;
+        }
+
+        .description {
+            color: #ffa200;
+            margin-top: 10px;
+            transition: transform 0.3s, color 0.3s;
+            position: relative;
+            z-index: 2;
+        }
+
+        .gesture:hover .description {
+            transform: scale(1.2);
+            color: #ff8700;
+        }
+
+        /* Background animation */
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, rgba(255, 149, 0, 0.162), rgba(0, 0, 0, 0.77));
+            background-size: 400% 400%;
+            animation: gradientAnimation 10s ease infinite;
+            z-index: 0;
+        }
+
+        @keyframes gradientAnimation {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+    </style>
+</head>
+<body>
+    <div class="content">
+        <h1>Welcome to Hand-Gesture-Gaming Project</h1>
+        <p>This Project takes hand gesture (through webcam of your laptop) as an input to move a 3D character model in a 3D environment built in Unity 3D.</p>
+        
+        <div class="gestures">
+            <div class="gesture">
+                <span class="emoji">👍</span>
+                <span class="description">JUMP</span>
+            </div>
+            <div class="gesture">
+                <span class="emoji">👎</span>
+                <span class="description">CROUCH</span>
+            </div>
+            <div class="gesture">
+                <span class="emoji">✌️</span>
+                <span class="description">START</span>
+            </div>
+            <div class="gesture">
+                <span class="emoji">✋</span>
+                <span class="description">STOP</span>
+            </div>
+            <div class="gesture">
+                <span class="emoji">👉</span>
+                <span class="description">RIGHT</span>
+            </div>
+            <div class="gesture">
+                <span class="emoji">👈</span>
+                <span class="description">LEFT</span>
+            </div>
+        </div>
+        
+        <a href="https://chaitanya-chafale.github.io/Hand-Gesture-Gaming/build/index.html" target="_blank" class="button">Play Now</a>
+    </div>
+</body>
+</html>

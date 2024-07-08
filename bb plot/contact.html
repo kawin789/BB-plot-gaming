@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Me - Gaming Website</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="stylesheet" href="./style.css">
+    <style>
+
+
+        .content-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        .contact-section {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            width: 100%;
+            max-width: 1200px;
+            margin-bottom: 20px;
+        }
+
+        .contact-info-container, .contact-form-container {
+            background-color: rgba(26, 26, 26, 0.9);
+            padding: 20px;
+            border-radius: 10px;
+            width: 45%;
+            max-width: 600px;
+            margin: 20px;
+            text-align: center;
+            animation: slideIn 1s ease-in-out;
+        }
+
+        .contact-info-container h2, .contact-info-container p {
+            margin-bottom: 20px;
+        }
+
+        .contact-info-container ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .contact-info-container ul li {
+            margin: 10px 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .contact-info-container .icon {
+            margin-right: 10px;
+            width: 24px;
+            height: 24px;
+            background-size: contain;
+        }
+
+        .contact-form-container form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .contact-form-container input, .contact-form-container textarea {
+            width: 100%;
+            margin: 10px 0;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            background-color: #333;
+            color: #fff;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+
+        .contact-form-container input:focus, .contact-form-container textarea:focus {
+            background-color: #444;
+            transform: scale(1.05);
+        }
+
+        .contact-form-container button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            background-color: #fe8700;
+            color: #000000;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+
+        .contact-form-container button:hover {
+            background-color: rgba(254, 165, 82, 0.9);
+            transform: scale(1.1);
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            width: 100%;
+            max-width: 1200px;
+            flex-wrap: wrap;
+        }
+
+        .social-link {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-color: rgba(26, 26, 26, 0.9);
+            padding: 10px;
+            border-radius: 10px;
+            transition: transform 0.3s ease;
+            animation: slideIn 1s ease-in-out;
+            width: 150px;
+            margin: 10px;
+        }
+
+        .social-link:hover {
+            transform: scale(1.1);
+        }
+
+        .social-link i {
+            margin-bottom: 10px;
+            color: #fe8700;
+        }
+
+        .social-link a {
+            color: #fe8700;
+            text-decoration: none;
+        }
+
+        .social-link a:hover {
+            text-decoration: underline;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideIn {
+            from { transform: translateY(50px); }
+            to { transform: translateY(0); }
+        }
+    </style>
+</head>
+<body class="dark-mode">
+    <div class="header">
+        <div class="logo-section">
+            <img src="./Assets/logo.png" alt="BB Gaming Logo">
+            <h1>BB Plot</h1>
+            <br><br>
+            <p>"I'm not addicted to gaming,<br> I'm committed to it."</p>
+        </div>
+        <div class="navbar">
+            <a href="./home.html" class="parallelogram">Home</a>
+            <a href="./game.html" class="parallelogram">Online Games</a>
+            <a href="./download.html" class="parallelogram">Downloads</a>
+            <a href="./reviews.html" class="parallelogram">Reviews</a>
+            <a href="./video.html" class="parallelogram">Game Video</a>
+            <a href="./card.html" class="parallelogram">Store</a>
+            <a href="./ar.html" class="parallelogram">HG Game</a>
+            <a href="./ai.html" class="parallelogram">AI</a>
+            <div class="mode-toggle" onclick="toggleMode()">🌓</div>
+            <div class="burger-menu" onclick="toggleBurgerMenu()">&#9776;</div>
+        </div>
+        <div id="burgerMenuContent" class="burger-menu-content">
+            <a href="./home.html">Home</a>
+            <a href="./game.html">Online Games</a>
+            <a href="./download.html">Downloads</a>
+            <a href="./reviews.html">Reviews</a>
+            <a href="./video.html">Play Video</a>
+            <a href="./card.html">Store</a>
+            <a href="./ar.html">HG Game</a>
+            <a href="./ai.html">AI</a>
+        </div>
+        <div class="user-menu">
+            <button class="parallelogram"><img src="./Assets/user.png" alt="User"></button>
+            <div class="user-menu-content">
+                <a href="./signin.html">Sign In</a>
+                <a href="./signup.html">Sign up</a>
+                <a href="#logout">Logout</a>
+                <a href="./contact.html">Contact</a>
+            </div>
+        </div>
+    </div>
+    <div class="content-container">
+        <div class="contact-section">
+            <div class="contact-info-container">
+                <h2>CONTACT ME HERE</h2>
+                <p>Thank you for visiting [BBPLOT GAMING]. Whether you have a question, feedback, or need assistance, we're here to help. Please choose the appropriate contact method below, we'll get back to you as soon as possible.</p>
+                <ul>
+                    <li><span class="icon location-icon"></span><i class="fa-solid fa-location-dot"></i> Gamer's Haven, Virtual World</li>
+                    <li><span class="icon email-icon"></span><i class="fa-solid fa-envelope"></i> Email: BBplotGaming@gmail.com</li>
+                    <li><span class="icon phone-icon"></span><i class="fa-solid fa-phone"></i> Mobile: +1-800-123-4567</li>
+                    <li><span class="icon language-icon"></span><i class="fa-solid fa-language"></i> Languages: English, Gamer Speak</li>
+                </ul>
+            </div>
+            <div class="contact-form-container">
+                <form action="submit_form.php" method="post" onsubmit="return showAlert()">
+                    <input type="text" name="name" placeholder="YOUR NAME" required>
+                    <input type="email" name="email" placeholder="YOUR EMAIL" required>
+                    <input type="text" name="subject" placeholder="ENTER SUBJECT" required>
+                    <textarea name="feedback" placeholder="Share here...." required></textarea>
+                    <button type="submit">Send Message</button>
+                </form>
+            </div>
+        </div>
+        <div class="social-links">
+            <div class="social-link">
+                <i class="fa-brands fa-square-whatsapp fa-2xl" alt="WhatsApp"></i>
+                <h3>WhatsApp</h3>
+                <a href="https://chat.whatsapp.com/example">Join Group</a>
+            </div>
+            <div class="social-link">
+                <i class="fa-brands fa-facebook fa-2xl" alt="Facebook"></i>
+                <h3>Facebook</h3>
+                <a href="https://www.facebook.com/example">Follow Us</a>
+            </div>
+            <div class="social-link">
+                <i class="fa-brands fa-linkedin fa-2xl" alt="LinkedIn"></i>
+                <h3>LinkedIn</h3>
+                <a href="https://www.linkedin.com/company/example">Connect</a>
+            </div>
+            <div class="social-link">
+                <i class="fa-brands fa-instagram fa-2xl" alt="Instagram"></i>
+                <h3>Instagram</h3>
+                <a href="https://www.instagram.com/example">Follow Us</a>
+            </div>
+            <div class="social-link">
+                <i class="fa-brands fa-x-twitter fa-2xl" alt="X"></i>
+                <h3>X</h3>
+                <a href="https://www.x.com/example">Join Conversation</a>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        function showAlert() {
+            alert("Your message has been sent!");
+            return false; // Prevent form submission for demo purposes
+        }
+        function toggleMode() {
+            document.body.classList.toggle('light-mode');
+        }     
+        
+        function toggleBurgerMenu() {
+                var menuContent = document.getElementById("burgerMenuContent");
+                if (menuContent.style.display === "block") {
+                    menuContent.style.display = "none";
+                } else {
+                    menuContent.style.display = "block";
+                }
+            }
+    
+            function toggleMode() {
+                var body = document.body;
+                body.classList.toggle("dark-mode");
+                body.classList.toggle("light-mode");
+            }
+    </script>
+</body>
+</html>

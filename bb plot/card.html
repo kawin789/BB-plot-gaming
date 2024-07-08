@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Responsive Card Page</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="./style.css">
+    <style>
+        
+
+        .container {
+            padding: 20px;
+            
+        }
+
+        .section {
+            margin-bottom: 60px;
+            font-family: Arial, sans-serif;
+        }
+
+        .section h2 {
+            font-size: 24px;
+            margin-bottom: 20px;
+            text-align: center;
+            color: rgba(255, 123, 0, 0.936);
+            background-color: #00000072;
+        }
+
+        .card-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .card {
+            background: #ffffffaf;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin: 20px;
+            overflow: hidden;
+            position: relative;
+            text-align: center;
+            transition: transform 0.3s, box-shadow 0.3s;
+            width: 300px;
+            height: 400px;
+            transform-style: preserve-3d;
+        }
+
+        .card:hover {
+            transform: scale(1.05) rotateY(10deg);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .card img {
+            width: 100%;
+            height: 50%;
+            border-radius: 10px 10px 0 0;
+        }
+
+        .card-content {
+            padding: 15px;
+            height: 170px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .card h3 {
+            font-size: 18px;
+            margin: 0;
+            color: #000;
+        }
+
+        .card p {
+            color: #000000;
+            margin: 5px 0;
+        }
+
+        .card del {
+            color: #000000;
+        }
+
+        .card button {
+            background: #ff4500;
+            border: none;
+            color: #fff;
+            cursor: pointer;
+            padding: 10px 20px;
+            transition: background 0.3s, transform 0.3s;
+            transform-style: preserve-3d;
+            transform-origin: center;
+            position: relative;
+            z-index: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .card button i {
+            margin-right: 8px;
+        }
+
+        .card button:before {
+            content: "";
+            position: absolute;
+            background: rgba(255, 255, 255, 0.3);
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border-radius: 10px;
+            z-index: -1;
+            transform: translate3d(0, 0, -1px);
+            transition: opacity 0.3s;
+            opacity: 0;
+        }
+
+        .card button:hover {
+            background: #ff6347;
+            transform: perspective(500px) rotateX(15deg) scale(1.1);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .card button:hover:before {
+            opacity: 1;
+        }
+
+        .card[data-offer]:before {
+            background: #ff4500;
+            border-radius: 0 0 5px 5px;
+            color: #fff;
+            content: attr(data-offer);
+            font-size: 14px;
+            left: 0;
+            padding: 5px 10px;
+            position: absolute;
+            top: 0;
+        }
+
+        @media (max-width: 768px) {
+            .card {
+                width: calc(50% - 40px);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .card {
+                width: calc(100% - 40px);
+            }
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgb(0,0,0);
+            background-color: rgba(0,0,0,0.4);
+            padding-top: 60px;
+            animation: fadeIn 0.5s;
+        }
+
+        @keyframes fadeIn {
+            from {opacity: 0;}
+            to {opacity: 1;}
+        }
+
+        .modal-content {
+            background-color: #fefefe;
+            margin: 5% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            max-width: 500px;
+            border-radius: 10px;
+            animation: slideIn 0.5s;
+            color: #000;
+        }
+
+        @keyframes slideIn {
+            from {transform: translateY(-50px); opacity: 0;}
+            to {transform: translateY(0); opacity: 1;}
+        }
+
+        .modal-content img {
+            width: 100%;
+            margin-bottom: 15px;
+        }
+
+        .modal-content input,
+        .modal-content button {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+        }
+
+        .modal-content button {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content button i {
+            margin-right: 8px;
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body class="dark-mode">
+    <div class="header">
+        <div class="logo-section">
+            <img src="./Assets/logo.png" alt="BB Gaming Logo">
+            <h1>BB Plot</h1>
+            <br><br>
+            <p>"I'm not addicted to gaming,<br> I'm committed to it."</p>
+        </div>
+        <div class="navbar">
+            <a href="./home.html" class="parallelogram">Home</a>
+            <a href="./game.html" class="parallelogram">Online Games</a>
+            <a href="./download.html" class="parallelogram">Downloads</a>
+            <a href="./reviews.html" class="parallelogram">Reviews</a>
+            <a href="./video.html" class="parallelogram">Game Video</a>
+            <a href="./card.html" class="parallelogram">Store</a>
+            <a href="./ar.html" class="parallelogram">HG Game</a>
+            <a href="./ai.html" class="parallelogram">AI</a>
+            <div class="mode-toggle" onclick="toggleMode()">🌓</div>
+            <div class="burger-menu" onclick="toggleBurgerMenu()">&#9776;</div>
+        </div>
+        <div id="burgerMenuContent" class="burger-menu-content">
+            <a href="./home.html">Home</a>
+            <a href="./game.html">Online Games</a>
+            <a href="./download.html">Downloads</a>
+            <a href="./reviews.html">Reviews</a>
+            <a href="./video.html">Play Video</a>
+            <a href="./card.html">Store</a>
+            <a href="./ar.html">HG Game</a>
+            <a href="./ai.html">AI</a>
+        </div>
+        <div class="user-menu">
+            <button class="parallelogram"><img src="./Assets/user.png" alt="User"></button>
+            <div class="user-menu-content">
+                <a href="./signin.html">Sign In</a>
+                <a href="./signup.html">Sign up</a>
+                <a href="#logout">Logout</a>
+                <a href="./contact.html">Contact</a>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <!-- Games Section -->
+        <div class="section">
+            <h2>Games</h2>
+            <div class="card-container">
+                <div class="card" data-offer="SALE!">
+                    <img src="./Assets/store/assets/game1.jpg" alt="Assassins Creed">
+                    <div class="card-content">
+                        <h3>Assassins Creed Shadows Special Edition Xbox Series</h3>
+                        <p>Pre order</p>
+                        <p>Rs. 4,999</p>
+                        <button class="buy-button" data-title="Assassins Creed Shadows Special Edition Xbox Series" data-price="Rs. 4,999" data-image="./assets/game1.jpg"><i class="fas fa-shopping-cart"></i>Buy Now</button>
+                    </div>
+                </div>
+                <div class="card" data-offer="NEW">
+                    <img src="./Assets/store/assets/game2.jpg" alt="Star Wars Outlaws">
+                    <div class="card-content">
+                        <h3>Star Wars Outlaws Special Edition PS5</h3>
+                        <p>Pre order</p>
+                        <p>Rs. 4,999</p>
+                        <button class="buy-button" data-title="Star Wars Outlaws Special Edition PS5" data-price="Rs. 4,999" data-image="./assets/game2.jpg"><i class="fas fa-shopping-cart"></i>Buy Now</button>
+                    </div>
+                </div>
+                <div class="card" data-offer="HOT!">
+                    <img src="./Assets/store/assets/vision.jpg" alt="Visions of Mana">
+                    <div class="card-content">
+                        <h3>Visions Of Mana PS5</h3>
+                        <p>Pre order</p>
+                        <p>Rs. 3,499</p>
+                        <button class="buy-button" data-title="Visions Of Mana PS5" data-price="Rs. 3,499" data-image="./assets/vision.jpg"><i class="fas fa-shopping-cart"></i>Buy Now</button>
+                    </div>
+                </div>
+                <div class="card" data-offer="LIMITED OFFER!">
+                    <img src="./Assets/store/assets/game4.jpg" alt="Dragon Ball Sparking">
+                    <div class="card-content">
+                        <h3>Dragon Ball Sparking ZERO PS5</h3>
+                        <p>Pre order</p>
+                        <p>Rs. 4,499</p>
+                        <button class="buy-button" data-title="Dragon Ball Sparking ZERO PS5" data-price="Rs. 4,499" data-image="./assets/game4.jpg"><i class="fas fa-shopping-cart"></i>Buy Now</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Gadgets Section -->
+        <div class="section">
+            <h2>Gadgets</h2>
+            <div class="card-container">
+                <div class="card" data-offer="SALE!">
+                    <img src="./Assets/store/assets/game9.jpg" alt="Apple Watch Ultra">
+                    <div class="card-content">
+                        <h3>Apple Watch Ultra (GPS + Cellular, 49mm) Titanium Case</h3>
+                        <p>1 Month Warranty</p>
+                        <p><del>Rs. 51,999</del> Rs. 41,999</p>
+                        <button class="buy-button" data-title="Apple Watch Ultra (GPS + Cellular, 49mm) Titanium Case" data-price="Rs. 41,999" data-image="./assets/game9.jpg"><i class="fas fa-shopping-cart"></i>Buy Now</button>
+                    </div>
+                </div>
+                <div class="card" data-offer="NEW">
+                    <img src="./Assets/store/assets/game8.webp" alt="Sony PlayStation 5">
+                    <div class="card-content">
+                        <h3>Sony PlayStation 5 Slim Disc Edition 1TB</h3>
+                        <p>1 Year Warranty</p>
+                        <p>Rs. 54,990</p>
+                        <button class="buy-button" data-title="Sony PlayStation 5 Slim Disc Edition 1TB" data-price="Rs. 54,990" data-image="./assets/game8.jpg"><i class="fas fa-shopping-cart"></i>Buy Now</button>
+                    </div>
+                </div>
+                <div class="card" data-offer="HOT!">
+                    <img src="./Assets/store/assets/game7.jpg" alt="Gaming Desktop PC">
+                    <div class="card-content">
+                        <h3>Oculus Quest 2 Advanced All-in-One Virtual Reality Headset(128)</h3>
+                        <p>Brand Warranty</p>
+                        <p><del>Rs. 26,000</del>Rs. 29,999</p>
+                        <button class="buy-button" data-title="Oculus Quest 2 Advanced All-in-One Virtual Reality Headset(128)" data-price="Rs. 29,999" data-image="./assets/game7.jpg"><i class="fas fa-shopping-cart"></i>Buy Now</button>
+                    </div>
+                </div>
+                <div class="card" data-offer="PRE-OWNED">
+                    <img src="./Assets/store/assets/game10.jpg" alt="Apple iPad Air">
+                    <div class="card-content">
+                        <h3>Dysen Zone noise-cancelling headphones(Ultra Blue/Prussian Blue)</h3>
+                        <p>24 Month Warranty</p>
+                        <p><del>Rs. 59,900</del> Rs. 64,900</p>
+                        <button class="buy-button" data-title="Dysen Zone noise-cancelling headphones(Ultra Blue/Prussian Blue)" data-price="Rs. 64,900" data-image="./assets/game10.jpg"><i class="fas fa-shopping-cart"></i>Buy Now</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+        
+            <h3 id="modal-title"></h3>
+            <p id="modal-price"></p>
+            <input type="text" id="name" placeholder="Enter your name">
+            <input type="text" id="address" placeholder="Enter your address">
+            <button id="add-to-cart"><i class="fas fa-cart-plus"></i> Add to Cart</button>
+            <button id="continue-with-upi"><i class="fas fa-credit-card"></i> Continue with UPI</button>
+        </div>
+    </div>
+
+    <script>
+        // Get the modal
+        var modal = document.getElementById("modal");
+
+        // Get the button that opens the modal
+        var buyButtons = document.getElementsByClassName("buy-button");
+        
+
+        // Get the <span> element that closes the modal
+        var span = document.getElementsByClassName("close")[0];
+
+        // Loop through buy buttons and add click event
+        for (var i = 0; i < buyButtons.length; i++) {
+            buyButtons[i].onclick = function() {
+                modal.style.display = "block";
+                document.getElementById("modal-image").src = this.getAttribute("data-image");
+                document.getElementById("modal-title").textContent = this.getAttribute("data-title");
+                document.getElementById("modal-price").textContent = this.getAttribute("data-price");
+            }
+        }
+
+        // When the user clicks on <span> (x), close the modal
+        span.onclick = function() {
+            modal.style.display = "none";
+        }
+
+        // When the user clicks anywhere outside of the modal, close it
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+        function toggleMode() {
+            document.body.classList.toggle('light-mode');
+        }     
+        
+        function toggleBurgerMenu() {
+                var menuContent = document.getElementById("burgerMenuContent");
+                if (menuContent.style.display === "block") {
+                    menuContent.style.display = "none";
+                } else {
+                    menuContent.style.display = "block";
+                }
+            }
+    
+            function toggleMode() {
+                var body = document.body;
+                body.classList.toggle("dark-mode");
+                body.classList.toggle("light-mode");
+            }
+    </script>
+</body>
+</html>

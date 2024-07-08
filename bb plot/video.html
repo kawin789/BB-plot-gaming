@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gaming Videos</title>
+    <link rel="stylesheet" href="./style.css">
+    <style>
+ 
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #fe8700;
+            background-color: #00000066;
+        }
+
+        .video-cards {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            margin-bottom: 20px;
+        }
+
+        .video-card {
+            background-color: #33333384;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+            width: 250px;
+            margin: 10px;
+            transition: transform 0.3s, box-shadow 0.3s;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .video-card:hover {
+            transform: perspective(600px) rotateY(0deg) rotateX(-10deg);
+            box-shadow: 0 8px 16px rgba(247, 177, 111, 0.748);
+        }
+
+        .video-card img {
+            width: 100%;
+            height: auto;
+        }
+
+        .card-info {
+            padding: 15px;
+        }
+
+        .live-badge {
+            display: inline-block;
+            padding: 5px 10px;
+            background-color: #fe0000;
+            color: white;
+            border-radius: 4px;
+            margin-top: 10px;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.7);
+        }
+
+        .modal-content {
+            background-color: #fefefe;
+            margin: 15% auto;
+            padding: 20px;
+            border: 1px solid #000000;
+            width: 80%;
+            max-width: 700px;
+            position: relative;
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 25px;
+            color: #aaa;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .close-btn:hover,
+        .close-btn:focus {
+            color: #000;
+            text-decoration: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body class="dark-mode">
+    <div class="header">
+        <div class="logo-section">
+            <img src="./Assets/logo.png" alt="BB Gaming Logo">
+            <h1>BB Plot</h1>
+            <br><br>
+            <p>"I'm not addicted to gaming,<br> I'm committed to it."</p>
+        </div>
+        <div class="navbar">
+            <a href="./home.html" class="parallelogram">Home</a>
+            <a href="./game.html" class="parallelogram">Online Games</a>
+            <a href="./download.html" class="parallelogram">Downloads</a>
+            <a href="./reviews.html" class="parallelogram">Reviews</a>
+            <a href="./video.html" class="parallelogram">Game Video</a>
+            <a href="./card.html" class="parallelogram">Store</a>
+            <a href="./ar.html" class="parallelogram">HG Game</a>
+            <a href="./ai.html" class="parallelogram">AI</a>
+            <div class="mode-toggle" onclick="toggleMode()">🌓</div>
+            <div class="burger-menu" onclick="toggleBurgerMenu()">&#9776;</div>
+        </div>
+        <div id="burgerMenuContent" class="burger-menu-content">
+            <a href="./home.html">Home</a>
+            <a href="./game.html">Online Games</a>
+            <a href="./download.html">Downloads</a>
+            <a href="./reviews.html">Reviews</a>
+            <a href="./video.html">Play Video</a>
+            <a href="./card.html">Store</a>
+            <a href="./ar.html">HG Game</a>
+            <a href="./ai.html">AI</a>
+        </div>
+        <div class="user-menu">
+            <button class="parallelogram"><img src="./Assets/user.png" alt="User"></button>
+            <div class="user-menu-content">
+                <a href="./signin.html">Sign In</a>
+                <a href="./signup.html">Sign up</a>
+                <a href="#logout">Logout</a>
+                <a href="./contact.html">Contact</a>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <!-- Top Games Section -->
+        <section id="top-games">
+            <h2>Top Games</h2>
+            <div class="video-cards">
+                <div class="video-card" data-video="https://www.youtube.com/embed/E3Huy2cdih0?si=nMerTcIKMIPzhZb3">
+                    <img src="./Assets/youtube/assets/image1.jpg" alt="Game 1">
+                    <div class="card-info">
+                        <h3>ELDEN RING</h3>
+                        <p>Rise, Tarnished, and be guided by grace to brandish the power of the Elden Ring and become an Elden Lord in the Lands Between.</p>
+                    </div>
+                </div>
+                <div class="video-card" data-video="https://www.youtube.com/embed/Dw_oH5oiUSE?si=1j4zGSfTxfJSC1AW" >
+                    <img src="./Assets/youtube/assets/image2.jpg" alt="Game 2">
+                    <div class="card-info">
+                        <h3>Red Dead Redemption 2</h3>
+                        <p>The Red Dead Redemption 2 Companion connects directly with your PlayStation®4 and Xbox One® as you play to deliver a real-time interactive map with pan and zoom functions, helping your exploration and discovery throughout the expansive open-world</p>
+                    </div>
+                </div>
+                <div class="video-card" data-video="https://www.youtube.com/embed/Dhwda9-31S0?si=sQp2QgFJGPoKwPOK">
+                    <img src="./Assets/youtube/assets/image3.jpg" alt="Game 3">
+                    <div class="card-info">
+                        <h3>SQUAD BUSTERS</h3>
+                        <p>Every match is busting with unique, unpredictable fun!  Grow your Squad, loot bosses, bust your friends, collect & Evolve all-star Supercell characters from Clash of Clans, Brawl Stars, Hay Day, Clash Royale, and Boom Beach.
+                        </p>
+                    </div>
+                </div>
+                <div class="video-card" data-video="https://www.youtube.com/embed/GSJPueAJnu8?si=Py1zy2qAJ8v8Yx_D">
+                    <img src="./Assets/youtube/assets/image4.jpg" alt="Game 4">
+                    <div class="card-info">
+                        <h3>COOKING FEVER</h3>
+                        <p>Cook delicious meals and desserts in your very own restaurant and discover different cuisines from all over the world in this addictive time-management game! 👩‍🍳</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Live Game Channels Section -->
+        <section id="live-game-channels">
+            <h2>Live Game Channels</h2>
+            <div class="video-cards">
+                <div class="video-card"  data-video="https://www.youtube.com/embed/kRwEDXCOte8?si=KgKkiOzUhEgB7jPd">
+                    <img src="./Assets/youtube/assets/photo1.jpg" alt="Live Channel 1">
+                    <div class="card-info">
+                        <h3>Hakson bhai</h3>
+                        <p>HAKSON BHAI THE LONE WOLF KING IS BACK AND COMEBACK KING 😧FREE FIRE LIVE</p>
+                        <span class="live-badge">LIVE</span>
+                    </div>
+                </div>
+                <div class="video-card" data-video="https://www.youtube.com/embed/-MsXe-ttU-U?si=600xXJvxN6dTSEkR">
+                    <img src="./Assets/youtube/assets/photo2.jpg" alt="Live Channel 2">
+                    <div class="card-info">
+                        <h3>LOGO BLOCKS</h3>
+                        <p>FORTNITE CHAPTER 5 SEASON 4 COUNTDOWN LIVE🔴 24/7 & Live Event Countdown!</p>
+                        <span class="live-badge">LIVE</span>
+                    </div>
+                </div>
+                <div class="video-card" data-video="https://www.youtube.com/embed/KypY7LEy_mI?si=PTfl7EprjDMobdsq">
+                    <img src="./Assets/youtube/assets/photo3.jpg" alt="Live Channel 3">
+                    <div class="card-info">
+                        <h3>VISU Gamer</h3>
+                        <p>Mini Militia Live Stream | MM live Visu Gamer # 162|Human Is Live 💥 | Mini militia Custom Room 🤩 Gameplay | #minimilitia
+                       </p>
+                        <span class="live-badge">LIVE</span>
+                    </div>
+                </div>
+                <div class="video-card" data-video="https://www.youtube.com/embed/l0OE9kNwQ0Y?si=DavUUmUgikRfGa38">
+                    <img src="./Assets/youtube/assets/photo4.jpg" alt="Live Channel 4">
+                    <div class="card-info">
+                        <h3>Indian Gaming World</h3>
+                        <p>BLOCK DASH TEAMS STUMBLE GUYS LIVE | UNLIMITED BLOCK DASH LIVE. And for all the support you are showing! 🔥</p>
+                        <span class="live-badge">LIVE</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Game Play Videos Section -->
+        <section id="game-play-videos">
+            <h2>Game Play Videos</h2>
+            <div class="video-cards">
+                <div class="video-card" data-video="https://www.youtube.com/embed/playvideo1">
+                    <img src="./Assets/youtube/assets/pic1.jpg" alt="Gameplay Video 1">
+                    <div class="card-info">
+                        <h3>BOOST</h3>
+                        <p>Easily 3 Star Don't Poke the Bear Challenge (Clash of Clans)</p>
+                    </div>
+                </div>
+                <div class="video-card" data-video="https://www.youtube.com/embed/4P3BuxS02RM?si=ZL3gMpTMB913i242">
+                    <img src="./Assets/youtube/assets/pic2.jpg" alt="Gameplay Video 2">
+                    <div class="card-info">
+                        <h3>Judo Sloth Gaming</h3>
+                        <p>Among Us but the Impostor is Mini</p>
+                    </div>
+                </div>
+                <div class="video-card" data-video="https://www.youtube.com/embed/HMhab4kEFAI?si=sTcZSfHCD6kO5Q5U" >
+                    <img src="./Assets/youtube/assets/pic 4.jpg" alt="Gameplay Video 3">
+                    <div class="card-info">
+                        <h3>Zghari Gaming</h3>
+                        <p>Top 25 Best Anime Games for PlayStation 4 and PlayStation 5 | ps4 & ps5 anime games</p>
+                    </div>
+                </div>
+                <div class="video-card" data-video="https://www.youtube.com/embed/HzZhbhoTJMA?si=RQKF3LZvbREwnCEu">
+                    <img src="./Assets/youtube/assets/pic5.jpg" alt="Gameplay Video 4">
+                    <div class="card-info">
+                        <h3>Be Indie</h3>
+                        <p>The best puzzle adventure games (TOP 10 puzzles for PC)</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Modal -->
+    <div id="video-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn">&times;</span>
+            <iframe id="video-frame" width="560" height="315" src="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const modal = document.getElementById('video-modal');
+            const videoFrame = document.getElementById('video-frame');
+            const closeModal = document.querySelector('.close-btn');
+            
+            document.querySelectorAll('.video-card').forEach(card => {
+                card.addEventListener('click', () => {
+                    const videoSrc = card.getAttribute('data-video');
+                    videoFrame.src = videoSrc;
+                    modal.style.display = 'block';
+                });
+            });
+
+            closeModal.addEventListener('click', () => {
+                modal.style.display = 'none';
+                videoFrame.src = '';
+            });
+
+            window.addEventListener('click', (event) => {
+                if (event.target === modal) {
+                    modal.style.display = 'none';
+                    videoFrame.src = '';
+                }
+            });
+        });
+        function toggleMode() {
+            document.body.classList.toggle('light-mode');
+        }     
+        
+        function toggleBurgerMenu() {
+                var menuContent = document.getElementById("burgerMenuContent");
+                if (menuContent.style.display === "block") {
+                    menuContent.style.display = "none";
+                } else {
+                    menuContent.style.display = "block";
+                }
+            }
+    
+            function toggleMode() {
+                var body = document.body;
+                body.classList.toggle("dark-mode");
+                body.classList.toggle("light-mode");
+            }
+    </script>
+</body>
+</html>

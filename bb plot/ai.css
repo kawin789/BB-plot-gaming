@@ -1,0 +1,107 @@
+.main {
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    min-height: 100vh;
+    position: relative;
+    width: 100%;
+    
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+}
+
+.main .image-container {
+    padding: 10px;
+}
+
+.main .image-container .image {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 4px solid #000000;
+    border-radius: 7000px;
+    padding: -50px;
+    animation-name: arc;
+    animation-duration: 4s;
+    position: relative;
+  
+}
+
+@keyframes arc{
+    from{top: 80%;}
+    to{
+        top: 10%;
+    }
+}
+
+.main .image-container .image img {
+    width: 450px;
+    align-items: center;
+}
+
+.main .image-container h1 {
+    color:#fe8700;
+    text-align: center;
+    margin-bottom: 10px;
+    font-size: 40px;
+   
+}
+
+.main .image-container p {
+    color: #fe8700;
+    text-align: center;
+    margin-bottom: 40px;
+    font-size: 23px;
+     
+}
+.text{
+
+    border-radius: 23px;
+   position: relative;
+   top: 25px;
+   
+   padding: -5px;
+   margin-bottom: 20px;
+}
+   
+
+
+
+.main .input {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 40vw;
+    height: 50px;
+    border-radius: 20px;
+    background:#fe8700;
+    border: 4px solid #fe2f00;
+}
+
+.main .input .talk {
+    background: transparent;
+    outline: none;
+    border: none;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 15px;
+    cursor: pointer;
+}
+
+.main .input .talk img {
+    width: 20px;
+    height: 20px;
+    color: #000000;
+}
+
+.main .input .content {
+    color: #000000;
+    font-size: 15px;
+    margin-right: 20px;
+}

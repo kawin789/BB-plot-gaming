@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gaming Website</title>
+    <link rel="stylesheet" href="./style.css">
+    <style>
+       
+        
+        .play {
+            display: flex;
+            width: 100%;
+        }
+        
+
+        .content {
+            flex: 1;
+            padding: 90px;
+        }
+        
+        .content h2 {
+            color:  #fe8700;
+            text-align: center;
+            
+        }
+        
+        .game-gallery {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 70px;
+        }
+        
+        .game-card {
+            position: relative;
+            width: 650px;
+            height: 450px;
+            border: 2px solid #000000;
+            border-radius: 10px;
+            overflow: hidden;
+            transition: transform 0.3s ease;
+             margin-left: 40px;
+        }
+        
+        .game-card img {
+            width: 100%;
+            height: 100%;
+            border-radius: 10px;
+        }
+        
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            color: #ffffff85;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            border-radius: 10px;
+        }
+        
+        .overlay .play-button {
+            color: #fff;
+            background: orange;
+            padding: 20px 40px;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+        
+        .game-card:hover .overlay {
+            opacity: 1;
+        }
+        
+        .hidden {
+            display: none;
+        }
+        
+        .game-section {
+            animation: fadeIn 0.5s ease-in-out;
+        }
+        
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body class="dark-mode">
+    <div class="header">
+        <div class="logo-section">
+            <img src="./Assets/logo.png" alt="BB Gaming Logo">
+            <h1>BB Plot</h1>
+            <br><br>
+            <p>"I'm not addicted to gaming,<br> I'm committed to it."</p>
+        </div>
+        <div class="navbar">
+            <a href="./home.html" class="parallelogram">Home</a>
+            <a href="./game.html" class="parallelogram">Online Games</a>
+            <a href="./download.html" class="parallelogram">Downloads</a>
+            <a href="./reviews.html" class="parallelogram">Reviews</a>
+            <a href="./video.html" class="parallelogram">Game Video</a>
+            <a href="./card.html" class="parallelogram">Store</a>
+            <a href="./ar.html" class="parallelogram">HG Game</a>
+            <a href="./ai.html" class="parallelogram">AI</a>
+            <div class="mode-toggle" onclick="toggleMode()">🌓</div>
+            <div class="burger-menu" onclick="toggleBurgerMenu()">&#9776;</div>
+        </div>
+        <div id="burgerMenuContent" class="burger-menu-content">
+            <a href="./home.html">Home</a>
+            <a href="./game.html">Online Games</a>
+            <a href="./download.html">Downloads</a>
+            <a href="./reviews.html">Reviews</a>
+            <a href="./video.html">Play Video</a>
+            <a href="./card.html">Store</a>
+            <a href="./ar.html">HG Game</a>
+            <a href="./ai.html">AI</a>
+        </div>
+        <div class="user-menu">
+            <button class="parallelogram"><img src="./Assets/user.png" alt="User"></button>
+            <div class="user-menu-content">
+                <a href="./signin.html">Sign In</a>
+                <a href="./signup.html">Sign up</a>
+                <a href="#logout">Logout</a>
+                <a href="./contact.html">Contact</a>
+            </div>
+        </div>
+    </div>
+    <div class="gbody">
+        <div class="play">
+           
+            <main class="content">
+                <section id="racing" class="game-section">
+                    <h2>Hand Gesture Games</h2>
+                    <div class="game-gallery">
+                        <div class="game-card">
+                            <img src="./Assets/games/argame1.png" alt="Game 1">
+                            <div class="overlay">
+                                <a href="./rock-paper-scissors-master/demo/index.html" class="play-button">Play</a>
+                            </div>
+                        </div>
+                        <div class="game-card">
+                            <img src="./Assets/games/argame2.jpg" alt="Game 1">
+                            <div class="overlay">
+                                <a href="./survegame.html" class="play-button">Play</a>
+                            </div>
+                            </div>
+                        </section>
+                    </main>
+                </div>
+            </div>
+            <SCript>
+                function toggleMode() {
+                    document.body.classList.toggle('light-mode');
+                }     
+                
+                function toggleBurgerMenu() {
+                        var menuContent = document.getElementById("burgerMenuContent");
+                        if (menuContent.style.display === "block") {
+                            menuContent.style.display = "none";
+                        } else {
+                            menuContent.style.display = "block";
+                        }
+                    }
+            
+                    function toggleMode() {
+                        var body = document.body;
+                        body.classList.toggle("dark-mode");
+                        body.classList.toggle("light-mode");
+                    }
+            </SCript>
+        </body>
+        </html>

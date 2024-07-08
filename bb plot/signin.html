@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign In</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+</head>
+<style>
+    body {
+        background-image: url(./Assets/bg.jpg);
+        background-size: cover;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+        font-family: Arial, sans-serif;
+        perspective: 1000px;
+    }
+    
+    .container {
+        background: rgba(0, 0, 0, 0.8);
+        padding: 40px;
+        border-radius: 10px;
+        box-shadow: 0 15px 25px rgba(0, 0, 0, 0.5);
+        width: 300px;
+        text-align: center;
+        color: #fff;
+        transition: transform 1s ease, opacity 1s ease;
+        transform-style: preserve-3d;
+        transform: translateY(100px) scale(0.5);
+        opacity: 0;
+        animation: showContainer 1s forwards 0.5s;
+    }
+    
+    @keyframes showContainer {
+        to {
+            transform: translateY(0) scale(1);
+            opacity: 1;
+        }
+    }
+    
+    .input-group {
+        position: relative;
+        margin-bottom: 30px;
+    }
+    
+    .input-group input {
+        width: 100%;
+        padding: 10px 0;
+        font-size: 16px;
+        color: #fff;
+        margin-bottom: 30px;
+        border: none;
+        border-bottom: 1px solid #fff;
+        outline: none;
+        background: transparent;
+        transition: 0.3s ease;
+    }
+    
+    .input-group input:focus {
+        border-bottom: 1px solid #ff9800;
+    }
+    
+    .input-group label {
+        position: absolute;
+        top: 0;
+        left: 0;
+        padding: 10px 0;
+        font-size: 16px;
+        color: #fff;
+        pointer-events: none;
+        transition: 0.5s;
+    }
+    
+    .input-group input:focus ~ label,
+    .input-group input:valid ~ label {
+        top: -20px;
+        left: 0;
+        color: #ff9800;
+        font-size: 12px;
+    }
+    
+    .btn {
+        background: #ff9800;
+        border: none;
+        padding: 10px 120px;
+        border-radius: 5px;
+        cursor: pointer;
+        color: #fff;
+        transition: transform 0.3s, box-shadow 0.3s;
+        transform-style: preserve-3d;
+        display: block;
+        margin: 10px auto;
+    }
+    .btn a{
+        text-decoration: none;
+        color: #fff;
+    }
+    .btn a:hover{
+        text-decoration: none;
+    }
+    
+    .btn:hover {
+        transform: translateZ(20px);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+    }
+    
+    .google-btn {
+        background: #4285f4;
+        color: #fff;
+        padding: 10px 20px;
+        border-radius: 5px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        transition: transform 0.3s, box-shadow 0.3s;
+        margin-bottom: 10px;
+    }
+    
+    .google-btn i {
+        margin-right: 10px;
+    }
+    
+    .google-btn:hover {
+        transform: translateZ(20px);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+    }
+    
+    p {
+        margin: 20px 0 0;
+    }
+    
+    a {
+        color: #ff9800;
+        text-decoration: none;
+    }
+    
+    a:hover {
+        text-decoration: underline;
+    }
+    
+</style>
+<body>
+    <div class="container">
+        <div class="form-box sign-in">
+            <h2>Sign In</h2>
+            <form>
+                <div class="input-group">
+                    <input type="email" required>
+                    <label>Email</label>
+                </div>
+                <div class="input-group">
+                    <input type="password" required>
+                    <label>Password</label>
+                </div>
+                <button type="submit" class="btn"><a href="./home.html">SIGN IN</a></button>
+            </form>
+            <div class="google-btn" onclick="googleSignIn()">
+                <i class="fab fa-google"></i> Sign In with Google
+            </div>
+            <p>Don't have an account? <a href="signup.html">Sign Up</a></p>
+        </div>
+    </div>
+    <script src="script.js">
+        function googleSignIn() {
+            gapi.auth2.getAuthInstance().signIn().then(function(googleUser) {
+                console.log(googleUser.getBasicProfile().getName());
+            });
+        }
+        
+        function initGoogleSignIn() {
+            gapi.load('auth2', function() {
+                gapi.auth2.init({
+                    client_id: 'YOUR_GOOGLE_CLIENT_ID.apps.googleusercontent.com'
+                });
+            });
+        }
+        
+        document.addEventListener("DOMContentLoaded", function() {
+            initGoogleSignIn();
+        });
+        
+    </script>
+</body>
+</html>

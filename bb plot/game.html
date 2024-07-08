@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gaming Website</title>
+    <link rel="stylesheet" href="./style.css">
+    <style>
+        .gbody {
+            margin: 0;
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+            display: flex;
+        }
+        
+        .play {
+            display: flex;
+            width: 100%;
+        }
+        
+        .sidebar {
+            width: 200px;
+            background:  rgba(26, 26, 26, 0.9);
+            color: #fff;
+            padding: 20px;
+        }
+        
+        .sidebar h2 {
+            text-align: center;
+            color: orange;
+        }
+        
+        .sidebar ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        
+        .sidebar ul li {
+            margin: 60px 0;
+        }
+        
+        .sidebar ul li a {
+            color: #000000;
+            text-decoration: none;
+            font-size: 18px;
+            cursor: pointer;
+            display: block;
+            padding: 10px;
+            position: relative;
+            overflow: hidden;
+            padding: 20px;
+        }
+
+        .sidebar ul li a::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 200%;
+            height: 100%;
+            background: orange;
+            transform: skewX(-30deg);
+            transition: left 0.3s ease;
+            z-index: 0;
+        }
+
+        .sidebar ul li a:hover::before {
+            left: 100%;
+        }
+
+        .sidebar ul li a:hover {
+            color: #fff;
+        }
+
+        .sidebar ul li a span {
+            position: relative;
+            z-index: 1;
+        }
+
+        .content {
+            flex: 1;
+            padding: 20px;
+        }
+        
+        .content h2 {
+
+            color:  #fe8700;
+            text-align: center;
+            background-color: #0000006d;
+          
+        }
+        
+        .game-gallery {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 70px;
+        }
+        
+        .game-card {
+            position: relative;
+            width: 250px;
+            height: 250px;
+            border: 2px solid #444;
+            border-radius: 10px;
+            overflow: hidden;
+            transition: transform 0.3s ease;
+        }
+        
+        .game-card img {
+            width: 100%;
+            height: 100%;
+            border-radius: 10px;
+        }
+        
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            color: #ffffff85;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            border-radius: 10px;
+        }
+        
+        .overlay .play-button {
+            padding: 10px 20px;
+            background-color: #ff9800;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+            text-decoration: none;
+            color: #ffffff;
+        }
+        .play-button:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+        }
+        .game-card:hover .overlay {
+            opacity: 1;
+        }
+        
+        .hidden {
+            display: none;
+        }
+        
+        .game-section {
+            animation: fadeIn 0.5s ease-in-out;
+        }
+        
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body class="dark-mode">
+    <div class="header">
+        <div class="logo-section">
+            <img src="./Assets/logo.png" alt="BB Gaming Logo">
+            <h1>BB Plot</h1>
+            <br><br>
+            <p>"I'm not addicted to gaming,<br> I'm committed to it."</p>
+        </div>
+        <div class="navbar">
+            <a href="./home.html" class="parallelogram">Home</a>
+            <a href="./game.html" class="parallelogram">Online Games</a>
+            <a href="./download.html" class="parallelogram">Downloads</a>
+            <a href="./reviews.html" class="parallelogram">Reviews</a>
+            <a href="./video.html" class="parallelogram">Game Video</a>
+            <a href="./card.html" class="parallelogram">Store</a>
+            <a href="./ar.html" class="parallelogram">AR game</a>
+            <a href="./ai.html" class="parallelogram">AI</a>
+            <div class="mode-toggle" onclick="toggleMode()">🌓</div>
+            <div class="burger-menu" onclick="toggleBurgerMenu()">&#9776;</div>
+        </div>
+        <div id="burgerMenuContent" class="burger-menu-content">
+            <a href="./home.html">Home</a>
+            <a href="./game.html">Online Games</a>
+            <a href="./download.html">Downloads</a>
+            <a href="./reviews.html">Reviews</a>
+            <a href="./video.html">Play Video</a>
+            <a href="./card.html">Store</a>
+            <a href="./ar.html">AR game</a>
+            <a href="./ai.html">AI</a>
+        </div>
+        <div class="user-menu">
+            <button class="parallelogram"><img src="./Assets/user.png" alt="User"></button>
+            <div class="user-menu-content">
+                <a href="./signin.html">Sign In</a>
+                <a href="./signup.html">Sign up</a>
+                <a href="#logout">Logout</a>
+                <a href="./contact.html">Contact</a>
+            </div>
+        </div>
+    </div>
+    <div class="gbody">
+        <div class="play">
+            <aside class="sidebar">
+                <h2>Game Types</h2>
+                <ul>
+                    <li><a href="#racing" onclick="showSection('racing')"><span>Racing</span></a></li>
+                    <li><a href="#adventure" onclick="showSection('adventure')"><span>Adventure</span></a></li>
+                    <li><a href="#puzzle" onclick="showSection('puzzle')"><span>Puzzle</span></a></li>
+                    <li><a href="#stimulation" onclick="showSection('stimulation')"><span>Action</span></a></li>
+                    <li><a href="#sports" onclick="showSection('sports')"><span>Sports</span></a></li>
+                </ul>
+            </aside>
+            <main class="content">
+                <section id="racing" class="game-section">
+                    <h2>Racing Games</h2>
+                    <div class="game-gallery">
+                        <div class="game-card">
+                            <img src="./Assets/freegames/th.webp" alt="Game 1">
+                            <h2>race</h2> <div class="overlay">
+                                <a href="https://www.msn.com/en-in/play/games/up-hill-racing-2/cg-9mw8rk6nb6kr?shared_event=eyJzaGFyZUlkIjoiODZjOTAxNTctOTMzYS00YmEyLWIwNTItODM0MjdkY2FmMWIwIiwidGl0bGUiOiJJJ20gcGxheWluZyBVcCBIaWxsIFJhY2luZyAyLiBDaGVjayBpdCBvdXQhIiwiZGVzY3JpcHRpb24iOiJQbGF5IGFsbCBvZiB5b3VyIGZhdm9yaXRlIGdhbWVzIG9ubGluZSBmb3IgZnJlZSwgaW5jbHVkaW5nIFNvbGl0YWlyZSwgQ3Jvc3N3b3JkcywgV29yZCBHYW1lcyBhbmQgbW9yZSEiLCJpbWFnZUlkIjoiT0NHRS45bXc4cms2bmI2a3JfdjZfaGVybyJ9&ocid=cgshare-basic" class="play-button">Play</a>
+                            </div>
+                 </div>
+                        
+                        <div class="game-card">
+                            <img src="./Assets/freegames/rac2.webp" alt="Game 1">
+                            <div class="overlay">
+                                <a href="https://www.msn.com/en-in/play/games/bike-racing-2/cg-9pjmwr3lfc0d?shared_event=eyJzaGFyZUlkIjoiMjRmOGZlZTItYzYwYS00ZWQxLTk3YzQtYjY5MjlmNDliZDk2IiwidGl0bGUiOiJJJ20gcGxheWluZyBCaWtlIFJhY2luZyAyLiBDaGVjayBpdCBvdXQhIiwiZGVzY3JpcHRpb24iOiJQbGF5IGFsbCBvZiB5b3VyIGZhdm9yaXRlIGdhbWVzIG9ubGluZSBmb3IgZnJlZSwgaW5jbHVkaW5nIFNvbGl0YWlyZSwgQ3Jvc3N3b3JkcywgV29yZCBHYW1lcyBhbmQgbW9yZSEiLCJpbWFnZUlkIjoiT0NHRS45cGptd3IzbGZjMGRfdjVfaGVybyJ9&ocid=cgshare-basic" class="play-button">Play</a>
+                            </div>
+                        </div>
+                        <div class="game-card">
+                            <img src="./Assets/freegames/rac3.webp" alt="Game 1">
+                            <div class="overlay">
+                                <a href="https://www.msn.com/en-in/play/games/nitro-street-run-s2/cg-9nq2g8nrb2wg?shared_event=eyJzaGFyZUlkIjoiYTI5ZGI2ODctOWQwZi00NjUyLTg2OTgtNTJlNDlhNzMxNzEwIiwidGl0bGUiOiJJJ20gcGxheWluZyBOaXRybyBTdHJlZXQgUnVuIFMyLiBDaGVjayBpdCBvdXQhIiwiZGVzY3JpcHRpb24iOiJQbGF5IGFsbCBvZiB5b3VyIGZhdm9yaXRlIGdhbWVzIG9ubGluZSBmb3IgZnJlZSwgaW5jbHVkaW5nIFNvbGl0YWlyZSwgQ3Jvc3N3b3JkcywgV29yZCBHYW1lcyBhbmQgbW9yZSEiLCJpbWFnZUlkIjoiT0NHRS45bnEyZzhucmIyd2dfdjNfaGVybyJ9&ocid=cgshare-basic" class="play-button">Play</a>
+                            </div>
+                        </div>
+                        <div class="game-card">
+                            <img src="./Assets/freegames/rac4.webp" alt="Game 1">
+                            <div class="overlay">
+                                <a href="https://www.msn.com/en-in/play/games/cycle-sprint/cg-9mvq9gxf024k?shared_event=eyJzaGFyZUlkIjoiODljOWM2YjgtMzBhMi00Zjk1LWEwODktOGY0NTUwYjljZmM5IiwidGl0bGUiOiJJJ20gcGxheWluZyBDeWNsZSBTcHJpbnQuIENoZWNrIGl0IG91dCEiLCJkZXNjcmlwdGlvbiI6IlBsYXkgYWxsIG9mIHlvdXIgZmF2b3JpdGUgZ2FtZXMgb25saW5lIGZvciBmcmVlLCBpbmNsdWRpbmcgU29saXRhaXJlLCBDcm9zc3dvcmRzLCBXb3JkIEdhbWVzIGFuZCBtb3JlISIsImltYWdlSWQiOiJPQ0dFLjltdnE5Z3hmMDI0a192M19oZXJvIn0&ocid=cgshare-basic" class="play-button">Play</a>
+                            </div>
+                        </div>
+                        <div class="game-card">
+                            <img src="./Assets/freegames/rac5.webp" alt="Game 1">
+                            <div class="overlay">
+                                <a href="https://www.msn.com/en-in/play/games/king-kong-kart-racing/cg-9pdzcjml52r3?shared_event=eyJzaGFyZUlkIjoiYjQ5MThhYWUtNzE5MC00ZWZhLTllNzgtMjU5ZDllYmFmZmM0IiwidGl0bGUiOiJJJ20gcGxheWluZyBLaW5nIEtvbmcgS2FydCBSYWNpbmcuIENoZWNrIGl0IG91dCEiLCJkZXNjcmlwdGlvbiI6IlBsYXkgYWxsIG9mIHlvdXIgZmF2b3JpdGUgZ2FtZXMgb25saW5lIGZvciBmcmVlLCBpbmNsdWRpbmcgU29saXRhaXJlLCBDcm9zc3dvcmRzLCBXb3JkIEdhbWVzIGFuZCBtb3JlISIsImltYWdlSWQiOiJPQ0dFLjlwZHpjam1sNTJyM192MTJfaGVybyJ9&ocid=cgshare-basic" class="play-button">Play</a>
+                            </div>
+                        </div>
+                        <div class="game-card">
+                            <img src="./Assets/freegames/rac6.webp" alt="Game 1">
+                            <div class="overlay">
+                                <a href="https://www.msn.com/en-in/play/games/asphalt-retro/cg-9nfsbtt285sx?shared_event=eyJzaGFyZUlkIjoiMTEzZDJkMzQtZDU1ZC00ZmRiLWExNjEtN2U4NjIzYTAxNmNlIiwidGl0bGUiOiJJJ20gcGxheWluZyBBc3BoYWx0IFJldHJvLiBDaGVjayBpdCBvdXQhIiwiZGVzY3JpcHRpb24iOiJQbGF5IGFsbCBvZiB5b3VyIGZhdm9yaXRlIGdhbWVzIG9ubGluZSBmb3IgZnJlZSwgaW5jbHVkaW5nIFNvbGl0YWlyZSwgQ3Jvc3N3b3JkcywgV29yZCBHYW1lcyBhbmQgbW9yZSEiLCJpbWFnZUlkIjoiT0NHRS45bmZzYnR0Mjg1c3hfdjRfaGVybyJ9&ocid=cgshare-basic" class="play-button">Play</a>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <section id="adventure" class="game-section hidden">
+                    <h2>Adventure Games</h2>
+                    <div class="game-gallery">
+                        <div class="game-card">
+                            <img src="Assets/freegames/ad1.webp" alt="Game 2">
+                            <div class="overlay">
+                                <a href="https://www.msn.com/en-in/play/games/9pn3w5n6k25k/cg-9pn3w5n6k25k?shared_event=eyJzaGFyZUlkIjoiMmE0ZjYyYjQtYjI4OS00ZTUyLTgxMzgtMTc2ZGExODEwYTFjIiwidGl0bGUiOiJJJ20gcGxheWluZyBVcCBIaWxsIFJhY2luZyAyLiBDaGVjayBpdCBvdXQhIiwiZGVzY3JpcHRpb24iOiJQbGF5IGFsbCBvZiB5b3VyIGZhdm9yaXRlIGdhbWVzIG9ubGluZSBmb3IgZnJlZSwgaW5jbHVkaW5nIFNvbGl0YWlyZSwgQ3Jvc3N3b3JkcywgV29yZCBHYW1lcyBhbmQgbW9yZSEiLCJpbWFnZUlkIjoiT0NHRS45bXc4cms2bmI2a3JfdjZfaGVybyJ9&ocid=cgshare-basic&cvid=df88086ab5664fcda43064f41b56389f&ei=14&cgfrom=cg_landing_L2_adventure" class="play-button">Play</a>
+                            </div>
+                        </div>
+                        <div class="game-card">
+                            <img src="./Assets/freegames/ad6.webp" alt="Game 2">
+                            <div class="overlay">
+                                <a href="https://www.msn.com/en-in/play/games/9mzhw6rzct9j/cg-9mzhw6rzct9j?shared_event=eyJzaGFyZUlkIjoiMmE0ZjYyYjQtYjI4OS00ZTUyLTgxMzgtMTc2ZGExODEwYTFjIiwidGl0bGUiOiJJJ20gcGxheWluZyBVcCBIaWxsIFJhY2luZyAyLiBDaGVjayBpdCBvdXQhIiwiZGVzY3JpcHRpb24iOiJQbGF5IGFsbCBvZiB5b3VyIGZhdm9yaXRlIGdhbWVzIG9ubGluZSBmb3IgZnJlZSwgaW5jbHVkaW5nIFNvbGl0YWlyZSwgQ3Jvc3N3b3JkcywgV29yZCBHYW1lcyBhbmQgbW9yZSEiLCJpbWFnZUlkIjoiT0NHRS45bXc4cms2bmI2a3JfdjZfaGVybyJ9&ocid=cgshare-basic&cvid=0d243f9102054b3cb4de46230dee3e81&ei=16&cgfrom=cg_landing_L2_adventure" class="play-button">Play</a>
+                            </div>
+                        </div>
+                        <div class="game-card">
+                            <img src="./Assets/freegames/ad3.webp" alt="Game 2">
+                            <div class="overlay">
+                                <a href="https://www.msn.com/en-in/play/games/9pk306zzrpr5/cg-9pk306zzrpr5?shared_event=eyJzaGFyZUlkIjoiMmE0ZjYyYjQtYjI4OS00ZTUyLTgxMzgtMTc2ZGExODEwYTFjIiwidGl0bGUiOiJJJ20gcGxheWluZyBVcCBIaWxsIFJhY2luZyAyLiBDaGVjayBpdCBvdXQhIiwiZGVzY3JpcHRpb24iOiJQbGF5IGFsbCBvZiB5b3VyIGZhdm9yaXRlIGdhbWVzIG9ubGluZSBmb3IgZnJlZSwgaW5jbHVkaW5nIFNvbGl0YWlyZSwgQ3Jvc3N3b3JkcywgV29yZCBHYW1lcyBhbmQgbW9yZSEiLCJpbWFnZUlkIjoiT0NHRS45bXc4cms2bmI2a3JfdjZfaGVybyJ9&ocid=cgshare-basic&cvid=71de3135022845bbbd4f938520a93357&ei=15&cgfrom=cg_landing_L2_adventure" class="play-button">Play</a>
+                            </div>
+                        </div>
+                        <div class="game-card">
+                            <img src="./Assets/freegames/ad4.webp" alt="Game 2">
+                            <div class="overlay">
+                                <a href="https://www.msn.com/en-in/play/games/9mtndqf7rjgg/cg-9mtndqf7rjgg?shared_event=eyJzaGFyZUlkIjoiMmE0ZjYyYjQtYjI4OS00ZTUyLTgxMzgtMTc2ZGExODEwYTFjIiwidGl0bGUiOiJJJ20gcGxheWluZyBVcCBIaWxsIFJhY2luZyAyLiBDaGVjayBpdCBvdXQhIiwiZGVzY3JpcHRpb24iOiJQbGF5IGFsbCBvZiB5b3VyIGZhdm9yaXRlIGdhbWVzIG9ubGluZSBmb3IgZnJlZSwgaW5jbHVkaW5nIFNvbGl0YWlyZSwgQ3Jvc3N3b3JkcywgV29yZCBHYW1lcyBhbmQgbW9yZSEiLCJpbWFnZUlkIjoiT0NHRS45bXc4cms2bmI2a3JfdjZfaGVybyJ9&ocid=cgshare-basic&cvid=4382829fafe3471490968d05bfea418e&ei=14&cgfrom=cg_landing_L2_adventure" class="play-button">Play</a>
+                            </div>
+                        </div>
+                        <div class="game-card">
+                            <img src="./Assets/freegames/ad2.webp" alt="Game 2">
+                            <div class="overlay">
+                                <a href="https://www.msn.com/en-in/play/games/9nxpzc6jtplz/cg-9nxpzc6jtplz?shared_event=eyJzaGFyZUlkIjoiMmE0ZjYyYjQtYjI4OS00ZTUyLTgxMzgtMTc2ZGExODEwYTFjIiwidGl0bGUiOiJJJ20gcGxheWluZyBVcCBIaWxsIFJhY2luZyAyLiBDaGVjayBpdCBvdXQhIiwiZGVzY3JpcHRpb24iOiJQbGF5IGFsbCBvZiB5b3VyIGZhdm9yaXRlIGdhbWVzIG9ubGluZSBmb3IgZnJlZSwgaW5jbHVkaW5nIFNvbGl0YWlyZSwgQ3Jvc3N3b3JkcywgV29yZCBHYW1lcyBhbmQgbW9yZSEiLCJpbWFnZUlkIjoiT0NHRS45bXc4cms2bmI2a3JfdjZfaGVybyJ9&ocid=cgshare-basic&cvid=fa708c9e96e548c88e32e7a21c1808cf&ei=13&cgfrom=cg_landing_L2_adventure" class="play-button">Play</a>
+                            </div>
+                        </div>
+                        <div class="game-card">
+                            <img src="./Assets/freegames/ad7.webp" alt="Game 2">
+                            <div class="overlay">
+                                <a href="https://www.msn.com/en-in/play/games/9ndvz75px43h/cg-9ndvz75px43h?shared_event=eyJzaGFyZUlkIjoiMmE0ZjYyYjQtYjI4OS00ZTUyLTgxMzgtMTc2ZGExODEwYTFjIiwidGl0bGUiOiJJJ20gcGxheWluZyBVcCBIaWxsIFJhY2luZyAyLiBDaGVjayBpdCBvdXQhIiwiZGVzY3JpcHRpb24iOiJQbGF5IGFsbCBvZiB5b3VyIGZhdm9yaXRlIGdhbWVzIG9ubGluZSBmb3IgZnJlZSwgaW5jbHVkaW5nIFNvbGl0YWlyZSwgQ3Jvc3N3b3JkcywgV29yZCBHYW1lcyBhbmQgbW9yZSEiLCJpbWFnZUlkIjoiT0NHRS45bXc4cms2bmI2a3JfdjZfaGVybyJ9&ocid=cgshare-basic&cvid=344fedcb93f44139b5e2bff0a9a1ade3&ei=12&cgfrom=cg_landing_L2_adventure" class="play-button">Play</a>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <section id="puzzle" class="game-section hidden">
+                    <h2>Puzzle Games</h2>
+                    <div class="game-gallery">
+                        <div class="game-card">
+                            <img src="./Assets/freegames/pz1.webp" alt="Game 3">
+                            <div class="overlay">
+                                <a href="https://www.msn.com/en-in/play/games/9nb4jqwq0dft/cg-9nb4jqwq0dft?shared_event=eyJzaGFyZUlkIjoiMmE0ZjYyYjQtYjI4OS00ZTUyLTgxMzgtMTc2ZGExODEwYTFjIiwidGl0bGUiOiJJJ20gcGxheWluZyBVcCBIaWxsIFJhY2luZyAyLiBDaGVjayBpdCBvdXQhIiwiZGVzY3JpcHRpb24iOiJQbGF5IGFsbCBvZiB5b3VyIGZhdm9yaXRlIGdhbWVzIG9ubGluZSBmb3IgZnJlZSwgaW5jbHVkaW5nIFNvbGl0YWlyZSwgQ3Jvc3N3b3JkcywgV29yZCBHYW1lcyBhbmQgbW9yZSEiLCJpbWFnZUlkIjoiT0NHRS45bXc4cms2bmI2a3JfdjZfaGVybyJ9&ocid=cgshare-basic&cvid=5b088e5245ef465d8c0864fefba37f5f&ei=13&cgfrom=cg_landing_L2_puzzle" class="play-button">Play</a>
+                            </div>
+                        </div>
+                        <div class="game-card">
+                            <img src="./Assets/freegames/pz2.webp" alt="Game 3">
+                            <div class="overlay">
+                                <a href="https://www.msn.com/en-in/play/games/9mvqgdfvnng4/cg-9mvqgdfvnng4?shared_event=eyJzaGFyZUlkIjoiMmE0ZjYyYjQtYjI4OS00ZTUyLTgxMzgtMTc2ZGExODEwYTFjIiwidGl0bGUiOiJJJ20gcGxheWluZyBVcCBIaWxsIFJhY2luZyAyLiBDaGVjayBpdCBvdXQhIiwiZGVzY3JpcHRpb24iOiJQbGF5IGFsbCBvZiB5b3VyIGZhdm9yaXRlIGdhbWVzIG9ubGluZSBmb3IgZnJlZSwgaW5jbHVkaW5nIFNvbGl0YWlyZSwgQ3Jvc3N3b3JkcywgV29yZCBHYW1lcyBhbmQgbW9yZSEiLCJpbWFnZUlkIjoiT0NHRS45bXc4cms2bmI2a3JfdjZfaGVybyJ9&ocid=cgshare-basic&cvid=33bcd81f7b104bf3a25d10341a70bedc&ei=12&cgfrom=cg_landing_L2_puzzle" class="play-button">Play</a>
+                            </div>
+                        </div>
+                        <div class="game-card">
+                            <img src="./Assets/freegames/pz3.webp" alt="Game 3">
+                            <div class="overlay">
+                                <a href="https://www.msn.com/en-in/play/games/9nkxp0kxmpdz/cg-9nkxp0kxmpdz?shared_event=eyJzaGFyZUlkIjoiMmE0ZjYyYjQtYjI4OS00ZTUyLTgxMzgtMTc2ZGExODEwYTFjIiwidGl0bGUiOiJJJ20gcGxheWluZyBVcCBIaWxsIFJhY2luZyAyLiBDaGVjayBpdCBvdXQhIiwiZGVzY3JpcHRpb24iOiJQbGF5IGFsbCBvZiB5b3VyIGZhdm9yaXRlIGdhbWVzIG9ubGluZSBmb3IgZnJlZSwgaW5jbHVkaW5nIFNvbGl0YWlyZSwgQ3Jvc3N3b3JkcywgV29yZCBHYW1lcyBhbmQgbW9yZSEiLCJpbWFnZUlkIjoiT0NHRS45bXc4cms2bmI2a3JfdjZfaGVybyJ9&ocid=cgshare-basic&cvid=5df12a39c644421eb2d54ba9712edf55&ei=15&cgfrom=cg_landing_L2_puzzle" class="play-button">Play</a>
+                            </div>
+                        </div>
+                        <div class="game-card">
+                            <img src="./Assets/freegames/pz4.webp" alt="Game 3">
+                            <div class="overlay">
+                                <a href="https://www.msn.com/en-in/play/games/9nkpq612m8d8/cg-9nkpq612m8d8?shared_event=eyJzaGFyZUlkIjoiMmE0ZjYyYjQtYjI4OS00ZTUyLTgxMzgtMTc2ZGExODEwYTFjIiwidGl0bGUiOiJJJ20gcGxheWluZyBVcCBIaWxsIFJhY2luZyAyLiBDaGVjayBpdCBvdXQhIiwiZGVzY3JpcHRpb24iOiJQbGF5IGFsbCBvZiB5b3VyIGZhdm9yaXRlIGdhbWVzIG9ubGluZSBmb3IgZnJlZSwgaW5jbHVkaW5nIFNvbGl0YWlyZSwgQ3Jvc3N3b3JkcywgV29yZCBHYW1lcyBhbmQgbW9yZSEiLCJpbWFnZUlkIjoiT0NHRS45bXc4cms2bmI2a3JfdjZfaGVybyJ9&ocid=cgshare-basic&cvid=a8941ef6dbb14a3d9f2dde0848e30e71&ei=13&cgfrom=cg_landing_L2_puzzle" class="play-button">Play</a>
+                            </div>
+                        </div>
+                        <div class="game-card">
+                            <img src="./Assets/freegames/pz5.webp" alt="Game 3">
+                            <div class="overlay">
+                                <a href="https://www.msn.com/en-in/play/games/9pht53d59wr6/cg-9pht53d59wr6?shared_event=eyJzaGFyZUlkIjoiMmE0ZjYyYjQtYjI4OS00ZTUyLTgxMzgtMTc2ZGExODEwYTFjIiwidGl0bGUiOiJJJ20gcGxheWluZyBVcCBIaWxsIFJhY2luZyAyLiBDaGVjayBpdCBvdXQhIiwiZGVzY3JpcHRpb24iOiJQbGF5IGFsbCBvZiB5b3VyIGZhdm9yaXRlIGdhbWVzIG9ubGluZSBmb3IgZnJlZSwgaW5jbHVkaW5nIFNvbGl0YWlyZSwgQ3Jvc3N3b3JkcywgV29yZCBHYW1lcyBhbmQgbW9yZSEiLCJpbWFnZUlkIjoiT0NHRS45bXc4cms2bmI2a3JfdjZfaGVybyJ9&ocid=cgshare-basic&cvid=951e0589465c4202b5d2dd49b8dbeb86&ei=17&cgfrom=cg_landing_L2_puzzle" class="play-button">Play</a>
+                            </div>
+                        </div>
+                        <div class="game-card">
+                            <img src="./Assets/freegames/pz6.webp" alt="Game 3">
+                            <div class="overlay">
+                                <a href="https://www.msn.com/en-in/play/games/9p87lp80483h/cg-9p87lp80483h?shared_event=eyJzaGFyZUlkIjoiMmE0ZjYyYjQtYjI4OS00ZTUyLTgxMzgtMTc2ZGExODEwYTFjIiwidGl0bGUiOiJJJ20gcGxheWluZyBVcCBIaWxsIFJhY2luZyAyLiBDaGVjayBpdCBvdXQhIiwiZGVzY3JpcHRpb24iOiJQbGF5IGFsbCBvZiB5b3VyIGZhdm9yaXRlIGdhbWVzIG9ubGluZSBmb3IgZnJlZSwgaW5jbHVkaW5nIFNvbGl0YWlyZSwgQ3Jvc3N3b3JkcywgV29yZCBHYW1lcyBhbmQgbW9yZSEiLCJpbWFnZUlkIjoiT0NHRS45bXc4cms2bmI2a3JfdjZfaGVybyJ9&ocid=cgshare-basic&cvid=4ac4802c62b740caafb4f2c5c002babd&ei=18&cgfrom=cg_landing_L2_puzzle" class="play-button">Play</a>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <section id="stimulation" class="game-section hidden">
+                    <h2>Action Games</h2>
+                    <div class="game-gallery">
+                        <div class="game-card">
+                            <img src="./Assets/freegames/ac1.webp" alt="Game 4">
+                            <div class="overlay">
+                                <a href="https://www.msn.com/en-in/play/games/9mvsmkmvhp65/cg-9mvsmkmvhp65?shared_event=eyJzaGFyZUlkIjoiMmE0ZjYyYjQtYjI4OS00ZTUyLTgxMzgtMTc2ZGExODEwYTFjIiwidGl0bGUiOiJJJ20gcGxheWluZyBVcCBIaWxsIFJhY2luZyAyLiBDaGVjayBpdCBvdXQhIiwiZGVzY3JpcHRpb24iOiJQbGF5IGFsbCBvZiB5b3VyIGZhdm9yaXRlIGdhbWVzIG9ubGluZSBmb3IgZnJlZSwgaW5jbHVkaW5nIFNvbGl0YWlyZSwgQ3Jvc3N3b3JkcywgV29yZCBHYW1lcyBhbmQgbW9yZSEiLCJpbWFnZUlkIjoiT0NHRS45bXc4cms2bmI2a3JfdjZfaGVybyJ9&ocid=cgshare-basic&cvid=e8c365513881465092fd5158f8f278fe&ei=65&cgfrom=cg_landing_L2_arcade" class="play-button">Play</a>
+                            </div>
+                        </div>
+                        <div class="game-card">
+                            <img src="./Assets/freegames/ac2.webp" alt="Game 4">
+                            <div class="overlay">
+                                <a href="https://www.msn.com/en-in/play/games/9n8bq7npxbfw/cg-9n8bq7npxbfw?shared_event=eyJzaGFyZUlkIjoiMmE0ZjYyYjQtYjI4OS00ZTUyLTgxMzgtMTc2ZGExODEwYTFjIiwidGl0bGUiOiJJJ20gcGxheWluZyBVcCBIaWxsIFJhY2luZyAyLiBDaGVjayBpdCBvdXQhIiwiZGVzY3JpcHRpb24iOiJQbGF5IGFsbCBvZiB5b3VyIGZhdm9yaXRlIGdhbWVzIG9ubGluZSBmb3IgZnJlZSwgaW5jbHVkaW5nIFNvbGl0YWlyZSwgQ3Jvc3N3b3JkcywgV29yZCBHYW1lcyBhbmQgbW9yZSEiLCJpbWFnZUlkIjoiT0NHRS45bXc4cms2bmI2a3JfdjZfaGVybyJ9&ocid=cgshare-basic&cvid=4079a5a6b2eb4de491855bc8ab5e8645&ei=12&cgfrom=cg_landing_L2_arcade" class="play-button">Play</a>
+                            </div>
+                        </div>
+                        <div class="game-card">
+                            <img src="./Assets/freegames/ac3.webp" alt="Game 4">
+                            <div class="overlay">
+                                <a href="https://www.msn.com/en-in/play/games/9mw6fcv4wcgf/cg-9mw6fcv4wcgf?shared_event=eyJzaGFyZUlkIjoiMmE0ZjYyYjQtYjI4OS00ZTUyLTgxMzgtMTc2ZGExODEwYTFjIiwidGl0bGUiOiJJJ20gcGxheWluZyBVcCBIaWxsIFJhY2luZyAyLiBDaGVjayBpdCBvdXQhIiwiZGVzY3JpcHRpb24iOiJQbGF5IGFsbCBvZiB5b3VyIGZhdm9yaXRlIGdhbWVzIG9ubGluZSBmb3IgZnJlZSwgaW5jbHVkaW5nIFNvbGl0YWlyZSwgQ3Jvc3N3b3JkcywgV29yZCBHYW1lcyBhbmQgbW9yZSEiLCJpbWFnZUlkIjoiT0NHRS45bXc4cms2bmI2a3JfdjZfaGVybyJ9&ocid=cgshare-basic&cvid=ba445c8485c9492eb9b5fb2240cebd8c&ei=47&cgfrom=cg_landing_home_recommended" class="play-button">Play</a>
+                            </div>
+                        </div>
+                        <div class="game-card">
+                            <img src="./Assets/freegames/ac4.webp" alt="Game 4">
+                            <div class="overlay">
+                                <a href="https://www.msn.com/en-in/play/games/9pc936sl0r35/cg-9pc936sl0r35?shared_event=eyJzaGFyZUlkIjoiMmE0ZjYyYjQtYjI4OS00ZTUyLTgxMzgtMTc2ZGExODEwYTFjIiwidGl0bGUiOiJJJ20gcGxheWluZyBVcCBIaWxsIFJhY2luZyAyLiBDaGVjayBpdCBvdXQhIiwiZGVzY3JpcHRpb24iOiJQbGF5IGFsbCBvZiB5b3VyIGZhdm9yaXRlIGdhbWVzIG9ubGluZSBmb3IgZnJlZSwgaW5jbHVkaW5nIFNvbGl0YWlyZSwgQ3Jvc3N3b3JkcywgV29yZCBHYW1lcyBhbmQgbW9yZSEiLCJpbWFnZUlkIjoiT0NHRS45bXc4cms2bmI2a3JfdjZfaGVybyJ9&ocid=cgshare-basic&cvid=2a40eeafc0cb4cef98ace1fca3ad8d52&ei=23&cgfrom=cg_landing_home_newgames" class="play-button">Play</a>
+                            </div>
+                        </div>
+                        <div class="game-card">
+                            <img src="./Assets/freegames/ac5.webp" alt="Game 4">
+                            <div class="overlay">
+                                <a href="https://www.msn.com/en-in/play/games/9pm68s3h0m66/cg-9pm68s3h0m66?shared_event=eyJzaGFyZUlkIjoiMmE0ZjYyYjQtYjI4OS00ZTUyLTgxMzgtMTc2ZGExODEwYTFjIiwidGl0bGUiOiJJJ20gcGxheWluZyBVcCBIaWxsIFJhY2luZyAyLiBDaGVjayBpdCBvdXQhIiwiZGVzY3JpcHRpb24iOiJQbGF5IGFsbCBvZiB5b3VyIGZhdm9yaXRlIGdhbWVzIG9ubGluZSBmb3IgZnJlZSwgaW5jbHVkaW5nIFNvbGl0YWlyZSwgQ3Jvc3N3b3JkcywgV29yZCBHYW1lcyBhbmQgbW9yZSEiLCJpbWFnZUlkIjoiT0NHRS45bXc4cms2bmI2a3JfdjZfaGVybyJ9&ocid=cgshare-basic&cvid=e709e76e902f4f1f93925b427cb31a72&ei=1275&cgfrom=cg_landing_home_word" class="play-button">Play</a>
+                            </div>
+                        </div>
+                        <div class="game-card">
+                            <img src="./Assets/freegames/ac6.webp" alt="Game 4">
+                            <div class="overlay">
+                                <a href="https://www.msn.com/en-in/play/games/9n5gkc4t7lzz/cg-9n5gkc4t7lzz?shared_event=eyJzaGFyZUlkIjoiMmE0ZjYyYjQtYjI4OS00ZTUyLTgxMzgtMTc2ZGExODEwYTFjIiwidGl0bGUiOiJJJ20gcGxheWluZyBVcCBIaWxsIFJhY2luZyAyLiBDaGVjayBpdCBvdXQhIiwiZGVzY3JpcHRpb24iOiJQbGF5IGFsbCBvZiB5b3VyIGZhdm9yaXRlIGdhbWVzIG9ubGluZSBmb3IgZnJlZSwgaW5jbHVkaW5nIFNvbGl0YWlyZSwgQ3Jvc3N3b3JkcywgV29yZCBHYW1lcyBhbmQgbW9yZSEiLCJpbWFnZUlkIjoiT0NHRS45bXc4cms2bmI2a3JfdjZfaGVybyJ9&ocid=cgshare-basic&cvid=450b15daf2bb4ae7821f4a95debce5d2&ei=26&cgfrom=cg_landing_home_simulation" class="play-button">Play</a>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <section id="sports" class="game-section hidden">
+                    <h2>Sports Games</h2>
+                    <div class="game-gallery">
+                        <div class="game-card">
+                            <img src="./Assets/freegames/sp1.webp" alt="Game 5">
+                            <div class="overlay">
+                                <a href="https://www.msn.com/en-in/play/games/9nwbpkbc30h9/cg-9nwbpkbc30h9?shared_event=eyJzaGFyZUlkIjoiMmE0ZjYyYjQtYjI4OS00ZTUyLTgxMzgtMTc2ZGExODEwYTFjIiwidGl0bGUiOiJJJ20gcGxheWluZyBVcCBIaWxsIFJhY2luZyAyLiBDaGVjayBpdCBvdXQhIiwiZGVzY3JpcHRpb24iOiJQbGF5IGFsbCBvZiB5b3VyIGZhdm9yaXRlIGdhbWVzIG9ubGluZSBmb3IgZnJlZSwgaW5jbHVkaW5nIFNvbGl0YWlyZSwgQ3Jvc3N3b3JkcywgV29yZCBHYW1lcyBhbmQgbW9yZSEiLCJpbWFnZUlkIjoiT0NHRS45bXc4cms2bmI2a3JfdjZfaGVybyJ9&ocid=cgshare-basic&cvid=70f63e83b9144d1092dd84abadfce078&ei=12&cgfrom=cg_landing_L2_sports" class="play-button">Play</a>
+                            </div>
+                        </div>
+                        <div class="game-card">
+                            <img src="./Assets/freegames/sp2.webp" alt="Game 5">
+                            <div class="overlay">
+                                <a href="https://www.msn.com/en-in/play/games/9p9nt6t0v98f/cg-9p9nt6t0v98f?shared_event=eyJzaGFyZUlkIjoiMmE0ZjYyYjQtYjI4OS00ZTUyLTgxMzgtMTc2ZGExODEwYTFjIiwidGl0bGUiOiJJJ20gcGxheWluZyBVcCBIaWxsIFJhY2luZyAyLiBDaGVjayBpdCBvdXQhIiwiZGVzY3JpcHRpb24iOiJQbGF5IGFsbCBvZiB5b3VyIGZhdm9yaXRlIGdhbWVzIG9ubGluZSBmb3IgZnJlZSwgaW5jbHVkaW5nIFNvbGl0YWlyZSwgQ3Jvc3N3b3JkcywgV29yZCBHYW1lcyBhbmQgbW9yZSEiLCJpbWFnZUlkIjoiT0NHRS45bXc4cms2bmI2a3JfdjZfaGVybyJ9&ocid=cgshare-basic&cvid=8bc76b26adf84eedb9476630901a5885&ei=13&cgfrom=cg_landing_L2_sports" class="play-button">Play</a>
+                            </div>
+                        </div>
+                        <div class="game-card">
+                            <img src="./Assets/freegames/sp3.webp" alt="Game 5">
+                            <div class="overlay">
+                                <a href="https://www.msn.com/en-in/play/games/9pm59hcfhbjx/cg-9pm59hcfhbjx?shared_event=eyJzaGFyZUlkIjoiMmE0ZjYyYjQtYjI4OS00ZTUyLTgxMzgtMTc2ZGExODEwYTFjIiwidGl0bGUiOiJJJ20gcGxheWluZyBVcCBIaWxsIFJhY2luZyAyLiBDaGVjayBpdCBvdXQhIiwiZGVzY3JpcHRpb24iOiJQbGF5IGFsbCBvZiB5b3VyIGZhdm9yaXRlIGdhbWVzIG9ubGluZSBmb3IgZnJlZSwgaW5jbHVkaW5nIFNvbGl0YWlyZSwgQ3Jvc3N3b3JkcywgV29yZCBHYW1lcyBhbmQgbW9yZSEiLCJpbWFnZUlkIjoiT0NHRS45bXc4cms2bmI2a3JfdjZfaGVybyJ9&ocid=cgshare-basic&cvid=7e1413bbe9514e00b93b450e71cec777&ei=12&cgfrom=cg_landing_L2_sports" class="play-button">Play</a>
+                            </div>
+                        </div>
+                        <div class="game-card">
+                            <img src="./Assets/freegames/sp4.webp" alt="Game 5">
+                            <div class="overlay">
+                                <a href="https://www.msn.com/en-in/play/games/9mvq9gxf024k/cg-9mvq9gxf024k?shared_event=eyJzaGFyZUlkIjoiMmE0ZjYyYjQtYjI4OS00ZTUyLTgxMzgtMTc2ZGExODEwYTFjIiwidGl0bGUiOiJJJ20gcGxheWluZyBVcCBIaWxsIFJhY2luZyAyLiBDaGVjayBpdCBvdXQhIiwiZGVzY3JpcHRpb24iOiJQbGF5IGFsbCBvZiB5b3VyIGZhdm9yaXRlIGdhbWVzIG9ubGluZSBmb3IgZnJlZSwgaW5jbHVkaW5nIFNvbGl0YWlyZSwgQ3Jvc3N3b3JkcywgV29yZCBHYW1lcyBhbmQgbW9yZSEiLCJpbWFnZUlkIjoiT0NHRS45bXc4cms2bmI2a3JfdjZfaGVybyJ9&ocid=cgshare-basic&cvid=5b4ba206264e4bdb8314e89063fcdfd2&ei=21&cgfrom=cg_landing_L2_sports" class="play-button">Play</a>
+                            </div>
+                        </div>
+                        <div class="game-card">
+                            <img src="./Assets/freegames/sp5.webp" alt="Game 5">
+                            <div class="overlay">
+                                <a href="https://www.msn.com/en-in/play/games/9n4v2151rf31/cg-9n4v2151rf31?shared_event=eyJzaGFyZUlkIjoiMmE0ZjYyYjQtYjI4OS00ZTUyLTgxMzgtMTc2ZGExODEwYTFjIiwidGl0bGUiOiJJJ20gcGxheWluZyBVcCBIaWxsIFJhY2luZyAyLiBDaGVjayBpdCBvdXQhIiwiZGVzY3JpcHRpb24iOiJQbGF5IGFsbCBvZiB5b3VyIGZhdm9yaXRlIGdhbWVzIG9ubGluZSBmb3IgZnJlZSwgaW5jbHVkaW5nIFNvbGl0YWlyZSwgQ3Jvc3N3b3JkcywgV29yZCBHYW1lcyBhbmQgbW9yZSEiLCJpbWFnZUlkIjoiT0NHRS45bXc4cms2bmI2a3JfdjZfaGVybyJ9&ocid=cgshare-basic&cvid=5b4ba206264e4bdb8314e89063fcdfd2&ei=25&cgfrom=cg_landing_L2_sports" class="play-button">Play</a>
+                            </div>
+                        </div>
+                        <div class="game-card">
+                            <img src="./Assets/freegames/sp6.webp" alt="Game 5">
+                            <div class="overlay">
+                                <a href="https://www.msn.com/en-in/play/games/9pjf3351zzgv/cg-9pjf3351zzgv?shared_event=eyJzaGFyZUlkIjoiMmE0ZjYyYjQtYjI4OS00ZTUyLTgxMzgtMTc2ZGExODEwYTFjIiwidGl0bGUiOiJJJ20gcGxheWluZyBVcCBIaWxsIFJhY2luZyAyLiBDaGVjayBpdCBvdXQhIiwiZGVzY3JpcHRpb24iOiJQbGF5IGFsbCBvZiB5b3VyIGZhdm9yaXRlIGdhbWVzIG9ubGluZSBmb3IgZnJlZSwgaW5jbHVkaW5nIFNvbGl0YWlyZSwgQ3Jvc3N3b3JkcywgV29yZCBHYW1lcyBhbmQgbW9yZSEiLCJpbWFnZUlkIjoiT0NHRS45bXc4cms2bmI2a3JfdjZfaGVybyJ9&ocid=cgshare-basic&cvid=5b4ba206264e4bdb8314e89063fcdfd2&ei=31&cgfrom=cg_landing_L2_sports" class="play-button">Play</a>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </main>
+        </div>
+    </div>
+    <script>
+        function showSection(sectionId) {
+            var sections = document.querySelectorAll('.game-section');
+            sections.forEach(function(section) {
+                if (section.id === sectionId) {
+                    section.classList.remove('hidden');
+                } else {
+                    section.classList.add('hidden');
+                }
+            });
+        }
+        function toggleMode() {
+            document.body.classList.toggle('light-mode');
+        }     
+        
+        function toggleBurgerMenu() {
+                var menuContent = document.getElementById("burgerMenuContent");
+                if (menuContent.style.display === "block") {
+                    menuContent.style.display = "none";
+                } else {
+                    menuContent.style.display = "block";
+                }
+            }
+    
+            function toggleMode() {
+                var body = document.body;
+                body.classList.toggle("dark-mode");
+                body.classList.toggle("light-mode");
+            }
+    </script>
+</body>
+</html>

@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game Reviews</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="stylesheet" href="./style.css">
+    <style>
+       
+
+        .review-page {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .review-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .review-header h1 {
+            color: #fe8700;
+            font-size: 36px;
+            background-color: rgba(0, 0, 0, 0.508);
+        }
+
+        .filter-buttons,
+        .give-review-btn {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 30px;
+        }
+
+        .filter-buttons button,
+        .give-review-btn button {
+            background-color: #fe8700dc;
+            border: none;
+            color: #fff;
+            padding: 10px 20px;
+            margin: 0 10px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .filter-buttons button:hover,
+        .give-review-btn button:hover {
+            background-color: rgba(254, 97, 0, 0.8);
+        }
+
+        .review-card {
+            background: rgba(26, 26, 26, 0.9);
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 30px;
+            display: flex;
+            align-items: center;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            animation: fadeIn 0.5s ease-in-out;
+            position: relative;
+            transition: transform 0.3s ease; /* Added for 3D effect */
+        }
+        .review-card img{
+            border-radius: 40px;
+            margin-right: 10px;
+        }
+        .review-card:hover {
+            transform: perspective(1000px) rotateY(8deg); /* 3D hover effect */
+            z-index: 2; /* Bring the card above others */
+        }
+
+        .hover-card {
+            display: none;
+            position: absolute;
+            top: 5px;
+            left: 110%;
+            width: 300px; /* Adjust width as needed */
+            background: rgba(26, 26, 26, 0.9);
+            border-radius: 10px;
+            padding: 10px;
+            box-shadow: 0 0 10px rgba(255, 97, 34, 0.558);
+            transform: translateX(-17px); /* Slightly to the left */
+            transition: transform 50s ease, opacity 0.3s ease; /* Added for animation effect */
+            opacity: 0;
+            z-index: 3; /* Ensure hover-card is above other review cards */
+        }
+
+        .hover-card img {
+            width: 100%;
+            border-radius: 10px;
+          
+        }
+
+        .hover-card button {
+            display: block;
+            width: 100%;
+            padding: 5px;
+            background-color: #fe8700;
+            border: none;
+            color: #fff;
+            font-size: 18px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            margin-top: 5px;
+        }
+
+        .hover-card button:hover {
+            background-color: rgba(254, 85, 0, 0.614);
+        }
+        .hover-card button a{
+            text-decoration: none;
+            color: white;
+        }
+        .star-rating {
+            color: gold;
+            margin: 5px 0;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .review-form {
+            display: none;
+            background: rgba(26, 26, 26, 0.9);
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+        }
+
+        .review-form input,
+        .review-form textarea {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: none;
+            border-radius: 5px;
+        }
+
+        .review-form button {
+            background-color: #fe8700;
+            border: none;
+            color: #fff;
+            padding: 10px 20px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .review-form button:hover {
+            background-color: rgba(254, 135, 0, 0.8);
+        }
+    </style>
+</head>
+<body class="dark-mode">
+    <div class="header">
+        <div class="logo-section">
+            <img src="./Assets/logo.png" alt="BB Gaming Logo">
+            <h1>BB Plot</h1>
+            <br><br>
+            <p>"I'm not addicted to gaming,<br> I'm committed to it."</p>
+        </div>
+        <div class="navbar">
+            <a href="./home.html" class="parallelogram">Home</a>
+            <a href="./game.html" class="parallelogram">Online Games</a>
+            <a href="./download.html" class="parallelogram">Downloads</a>
+            <a href="./reviews.html" class="parallelogram">Reviews</a>
+            <a href="./video.html" class="parallelogram">Game Video</a>
+            <a href="./card.html" class="parallelogram">Store</a>
+            <a href="./ar.html" class="parallelogram">HG Game</a>
+            <a href="./ai.html" class="parallelogram">AI</a>
+            <div class="mode-toggle" onclick="toggleMode()">🌓</div>
+            <div class="burger-menu" onclick="toggleBurgerMenu()">&#9776;</div>
+        </div>
+        <div id="burgerMenuContent" class="burger-menu-content">
+            <a href="./home.html">Home</a>
+            <a href="./game.html">Online Games</a>
+            <a href="./download.html">Downloads</a>
+            <a href="./reviews.html">Reviews</a>
+            <a href="./video.html">Play Video</a>
+            <a href="./card.html">Store</a>
+            <a href="./ar.html">HG Game</a>
+            <a href="./ai.html">AI</a>
+        </div>
+        <div class="user-menu">
+            <button class="parallelogram"><img src="./Assets/user.png" alt="User"></button>
+            <div class="user-menu-content">
+                <a href="./signin.html">Sign In</a>
+                <a href="./signup.html">Sign up</a>
+                <a href="#logout">Logout</a>
+                <a href="./contact.html">Contact</a>
+            </div>
+        </div>
+    </div>
+        <div class="revi">
+            <div class="review-page">
+                <div class="review-header">
+                    <h1>Game Reviews</h1>
+                </div>
+                <div class="give-review-btn">
+                    <button onclick="toggleReviewForm()">Give Review</button>
+                </div>
+                <div class="filter-buttons">
+                    <button onclick="filterReviews('all')">All</button>
+                    <button onclick="filterReviews('action')">Action</button>
+                    <button onclick="filterReviews('adventure')">Adventure</button>
+                    <button onclick="filterReviews('puzzle')">Puzzle</button>
+                    <button onclick="filterReviews('racing')">Racing</button>
+                    <button onclick="filterReviews('sports')">Sports</button>
+                </div>
+                <div class="review-form">
+                    <h2>Submit Your Review</h2>
+                    <input type="text" id="reviewer-name" placeholder="Your Name">
+                    <input type="text" id="review-category" placeholder="Category (e.g., action)">
+                    <textarea id="review-text" placeholder="Your Review"></textarea>
+                    <div class="star-rating-input">
+                        <label for="review-rating">Rating:</label>
+                        <input type="number" id="review-rating" min="1" max="5">
+                    </div>
+                    <button onclick="submitReview()">Submit</button>
+                </div>
+                <!-- Reviews -->
+                <div class="review-card action">
+                    <img src="./Assets/reviews/icon1.jpg" height="60" width="60" alt="User 1">
+                    <div cla-ss="review-content">
+                        <h3>John Doe</h3>
+                        <div class="star-rating">★★★★★</div>
+                        <p>This action game is absolutely fantastic! The graphics are stunning and the gameplay is smooth and engaging. Highly recommend!</p>
+                    </div>
+                    <div class="hover-card">
+                        <img src="./Assets/reviews/img first.webp" alt="Game Image">
+                        <button> <a href="https://www.msn.com/en-in/play/games/9n8bq7npxbfw/cg-9n8bq7npxbfw?cgfrom=cg_landing_L2_jumpbackin&ocid=cgshare-basic&cvid=00d58fb6ce78485490ee2dcef8135ff4&ei=131" target="_blank">Play Now </a></button>
+                    </div>
+                </div>
+                <div class="review-card adventure">
+                    <img src="./Assets/reviews/icon2.jpg"  height="60"  width="60" alt="user 2 ">
+                    <div class="review-content">
+                        <h3>Jane Smith</h3>
+                        <div class="star-rating">★★★★☆</div>
+                        <p>I really enjoyed this adventure game. It has great features and the storyline is captivating. Just wish it had more levels.</p>
+                    </div>
+                    <div class="hover-card">
+                        <img src="./Assets/reviews/img2.webp" alt="Game Image">
+                        <button> <a href="https://www.msn.com/en-in/play/games/9p70lt0zr384/cg-9p70lt0zr384?cgfrom=cg_landing_L2_racing&ocid=cgshare-basic&cvid=00d58fb6ce78485490ee2dcef8135ff4&ei=140" target="_blank">PlayNow </a></button>
+                    </div>
+                </div>
+                <div class="review-card puzzle">
+                    <img src="./Assets/reviews/icon3.jpg" height="60"  width="60" alt="User 3">
+                    <div class="review-content">
+                        <h3>Emily Johnson</h3>
+                        <div class="star-rating">★★★★★</div>
+                        <p>This puzzle game is amazing! I've been playing it non-stop since I downloaded it. The challenges are fun and keep you coming back for more.</p>
+                    </div>
+                    <div class="hover-card">
+                        <img src="./Assets/reviews/img3.webp" alt="Game Image">
+                        <button> <a href="https://www.msn.com/en-in/play/games/9njxf88jvc2d/cg-9njxf88jvc2d?cgfrom=cg_landing_L2_puzzle&ocid=cgshare-basic&cvid=00d58fb6ce78485490ee2dcef8135ff4&ei=148"target="_blank"> Play Now</a> </button>
+                    </div>
+                </div>
+                <div class="review-card racing">
+                    <img src="./Assets/reviews/icon4.jpg" height="60" width="60" alt="User 4">
+                    <div class="review-content">
+                        <h3>Michael Brown</h3>
+                        <div class="star-rating">★★★☆☆</div>
+                        <p>The racing game is good, but it crashes occasionally which can be frustrating. Otherwise, it's a great game with lots of potential.</p>
+                    </div>
+                    <div class="hover-card">
+                        <img src="./Assets/reviews/img4.webp" alt="Game Image">
+                        <button> <a href="https://www.msn.com/en-in/play/games/9ntkt2ltnr0k/cg-9ntkt2ltnr0k?cgfrom=cg_landing_L2_racing&ocid=cgshare-basic&cvid=00d58fb6ce78485490ee2dcef8135ff4&ei=153"target="_blank">Play Now </a></button>
+                    </div>
+                </div>
+                <div class="review-card sports">
+                    <img src="./Assets/reviews/icon5.jpg" height="60"  width="60" alt="User 5">
+                    <div class="review-content">
+                        <h3>Sarah Davis</h3>
+                        <div class="star-rating">★★★★★</div>
+                        <p>Best sports game I've played in a long time! The attention to detail and the level of creativity is top-notch. Absolutely love it!</p>
+                    </div>
+                    <div class="hover-card">
+                        <img src="./Assets/reviews/img5.webp" alt="Game Image">
+                        <button><a href="https://www.msn.com/en-in/play/games/9pnw81zjrbzj/cg-9pnw81zjrbzj?cgfrom=cg_landing_L2_sports&ocid=cgshare-basic&cvid=00d58fb6ce78485490ee2dcef8135ff4&ei=161"target="_blank"> Play Now</a></button>
+                    </div>
+                </div>
+                <div class="review-card action">
+                    <img src="./Assets/reviews/icon6.jpg" height="60"  width="60" alt="user 6" >
+                    <div class="review-content">
+                        <h3>David Wilson</h3>
+                        <div class="star-rating">★★★★☆</div>
+                        <p>Really fun action game with great graphics and sound effects. It gets a bit repetitive after a while, but still worth playing.</p>
+                    </div>
+                    <div class="hover-card">
+                        <img src="./Assets/reviews/img6.webp" alt="Game Image">
+                        <button> <a href="https://www.msn.com/en-in/play/games/9nzqssff8f8w/cg-9nzqssff8f8w?cgfrom=cg_landing_L2_arcade&ocid=cgshare-basic&cvid=00d58fb6ce78485490ee2dcef8135ff4&ei=181" target="_blank"> Play Now</a></button>
+                    </div>
+                </div>
+                <div class="review-card adventure">
+                    <img src="./Assets/reviews/icon7.jpg"  height="60"  width="60" alt="User 7">
+                    <div class="review-content">
+                        <h3>Laura Miller</h3>
+                        <div class="star-rating">★★★★★</div>
+                        <p>Incredible adventure game! The gameplay is smooth and the controls are intuitive. Highly addictive and entertaining.</p>
+                    </div>
+                    <div class="hover-card">
+                        <img src="./Assets/reviews/img7.webp" alt="Game Image">
+                        <button> <a href="https://www.msn.com/en-in/play/games/9mzhw6rzct9j/cg-9mzhw6rzct9j?shared_event=eyJzaGFyZUlkIjoiMmE0ZjYyYjQtYjI4OS00ZTUyLTgxMzgtMTc2ZGExODEwYTFjIiwidGl0bGUiOiJJJ20gcGxheWluZyBVcCBIaWxsIFJhY2luZyAyLiBDaGVjayBpdCBvdXQhIiwiZGVzY3JpcHRpb24iOiJQbGF5IGFsbCBvZiB5b3VyIGZhdm9yaXRlIGdhbWVzIG9ubGluZSBmb3IgZnJlZSwgaW5jbHVkaW5nIFNvbGl0YWlyZSwgQ3Jvc3N3b3JkcywgV29yZCBHYW1lcyBhbmQgbW9yZSEiLCJpbWFnZUlkIjoiT0NHRS45bXc4cms2bmI2a3JfdjZfaGVybyJ9&ocid=cgshare-basic&cvid=9a4d554101654deb88a1488a21cf7c58&ei=141&cgfrom=cg_landing_L2_adventure"target="_blank"> Play Now</a></button>
+                    </div>
+                </div>
+                <div class="review-card puzzle">
+                    <img src="./Assets/reviews/icon8.jpg"  height="60"  width="60" alt="User 8">
+                    <div class="review-content">
+                        <h3>James Anderson</h3>
+                        <div class="star-rating">★★★☆☆</div>
+                        <p>This puzzle game has potential, but it needs some improvements. The controls are a bit clunky and the graphics could be better.</p>
+                    </div>
+                    <div class="hover-card">
+                        <img src="./Assets/reviews/img8.webp" alt="Game Image">
+                        <button> <a href="https://www.msn.com/en-in/play/games/9mvqgdfvnng4/cg-9mvqgdfvnng4?shared_event=eyJzaGFyZUlkIjoiMmE0ZjYyYjQtYjI4OS00ZTUyLTgxMzgtMTc2ZGExODEwYTFjIiwidGl0bGUiOiJJJ20gcGxheWluZyBVcCBIaWxsIFJhY2luZyAyLiBDaGVjayBpdCBvdXQhIiwiZGVzY3JpcHRpb24iOiJQbGF5IGFsbCBvZiB5b3VyIGZhdm9yaXRlIGdhbWVzIG9ubGluZSBmb3IgZnJlZSwgaW5jbHVkaW5nIFNvbGl0YWlyZSwgQ3Jvc3N3b3JkcywgV29yZCBHYW1lcyBhbmQgbW9yZSEiLCJpbWFnZUlkIjoiT0NHRS45bXc4cms2bmI2a3JfdjZfaGVybyJ9&ocid=cgshare-basic&cvid=9a4d554101654deb88a1488a21cf7c58&ei=146&cgfrom=cg_landing_L2_puzzle"target="_blank"> Play Now </a> </button>
+                    </div>
+                </div>
+                <div class="review-card racing">
+                    <img src="./Assets/reviews/icon9.jpg"  height="60"  width="60" alt="User 9">
+                    <div class="review-content">
+                        <h3>Amy Clark</h3>
+                        <div class="star-rating">★★★★☆</div>
+                        <p>Great racing game with lots of fun levels. The difficulty increases at a good pace, keeping the game interesting and challenging.</p>
+                    </div>
+                    <div class="hover-card">
+                        <img src="./Assets/reviews/img9.webp" alt="Game Image">
+                        <button> <a href="https://www.msn.com/en-in/play/games/9mt6s4l1dv7f/cg-9mt6s4l1dv7f?shared_event=eyJzaGFyZUlkIjoiMmE0ZjYyYjQtYjI4OS00ZTUyLTgxMzgtMTc2ZGExODEwYTFjIiwidGl0bGUiOiJJJ20gcGxheWluZyBVcCBIaWxsIFJhY2luZyAyLiBDaGVjayBpdCBvdXQhIiwiZGVzY3JpcHRpb24iOiJQbGF5IGFsbCBvZiB5b3VyIGZhdm9yaXRlIGdhbWVzIG9ubGluZSBmb3IgZnJlZSwgaW5jbHVkaW5nIFNvbGl0YWlyZSwgQ3Jvc3N3b3JkcywgV29yZCBHYW1lcyBhbmQgbW9yZSEiLCJpbWFnZUlkIjoiT0NHRS45bXc4cms2bmI2a3JfdjZfaGVybyJ9&ocid=cgshare-basic&cvid=9a4d554101654deb88a1488a21cf7c58&ei=152&cgfrom=cg_landing_L2_racing"target="_blank"> Play Now</a> </button>
+                    </div>
+                </div>
+                <div class="review-card sports">
+                    <img src="./Assets/reviews/icon10.jpg"  height="60"  width="60" alt="User 10">
+                    <div class="review-content">
+                        <h3>Robert Martinez</h3>
+                        <div class="star-rating">★★★★★</div>
+                        <p>One of the best sports games out there! The storyline is engaging and the graphics are out of this world. A must-play for any gamer!</p>
+                    </div>
+                    <div class="hover-card">
+                        <img src="./Assets/reviews/im10.webp" alt="Game Image">
+                        <button> <a href="https://www.msn.com/en-in/play/games/9mv8fx3g6h83/cg-9mv8fx3g6h83?shared_event=eyJzaGFyZUlkIjoiMmE0ZjYyYjQtYjI4OS00ZTUyLTgxMzgtMTc2ZGExODEwYTFjIiwidGl0bGUiOiJJJ20gcGxheWluZyBVcCBIaWxsIFJhY2luZyAyLiBDaGVjayBpdCBvdXQhIiwiZGVzY3JpcHRpb24iOiJQbGF5IGFsbCBvZiB5b3VyIGZhdm9yaXRlIGdhbWVzIG9ubGluZSBmb3IgZnJlZSwgaW5jbHVkaW5nIFNvbGl0YWlyZSwgQ3Jvc3N3b3JkcywgV29yZCBHYW1lcyBhbmQgbW9yZSEiLCJpbWFnZUlkIjoiT0NHRS45bXc4cms2bmI2a3JfdjZfaGVybyJ9&ocid=cgshare-basic&cvid=9a4d554101654deb88a1488a21cf7c58&ei=158&cgfrom=cg_landing_L2_sports"target="_blank"> Play Now</a> </button>
+                    </div>
+                </div>
+                <!-- Additional Reviews -->
+                <div class="review-card action">
+                    <img src="./Assets/reviews/icon11.jpg"  height="60"  width="60" alt="User 11">
+                    <div class="review-content">
+                        <h3>Alice Green</h3>
+                        <div class="star-rating">★★★★★</div>
+                        <p>This action game blew me away! The storyline is gripping, and the gameplay mechanics are innovative. Must try!</p>
+                    </div>
+                    <div class="hover-card">
+                        <img src="./Assets/reviews/img10.webp" alt="Game Image">
+                        <button> <a href="https://www.msn.com/en-in/play/games/stickman-fighter-mega-brawl/cg-9mvsmkmvhp65?shared_event=eyJzaGFyZUlkIjoiMmE0ZjYyYjQtYjI4OS00ZTUyLTgxMzgtMTc2ZGExODEwYTFjIiwidGl0bGUiOiJJJ20gcGxheWluZyBVcCBIaWxsIFJhY2luZyAyLiBDaGVjayBpdCBvdXQhIiwiZGVzY3JpcHRpb24iOiJQbGF5IGFsbCBvZiB5b3VyIGZhdm9yaXRlIGdhbWVzIG9ubGluZSBmb3IgZnJlZSwgaW5jbHVkaW5nIFNvbGl0YWlyZSwgQ3Jvc3N3b3JkcywgV29yZCBHYW1lcyBhbmQgbW9yZSEiLCJpbWFnZUlkIjoiT0NHRS45bXc4cms2bmI2a3JfdjZfaGVybyJ9&ocid=cgshare-basic&cvid=9a4d554101654deb88a1488a21cf7c58&ei=168&cgfrom=cg_tag_L2_action"target="_blank"> Play Now</a> </button>
+                    </div>
+                </div>
+                <div class="review-card puzzle">
+                    <img src="./Assets/reviews/icon12.jpg"  height="60"  width="60" alt="User 12">
+                    <div class="review-content">
+                        <h3>Tom Lee</h3>
+                        <div class="star-rating">★★★★☆</div>
+                        <p>Challenging and fun puzzle game. Some puzzles are a bit too hard, but overall a great experience.</p>
+                    </div>
+                    <div class="hover-card">
+                        <img src="./Assets/reviews/img12.webp" alt="Game Image">
+                        <button> <a href="https://www.msn.com/en-in/play/games/9nb4jqwq0dft/cg-9nb4jqwq0dft?shared_event=eyJzaGFyZUlkIjoiMmE0ZjYyYjQtYjI4OS00ZTUyLTgxMzgtMTc2ZGExODEwYTFjIiwidGl0bGUiOiJJJ20gcGxheWluZyBVcCBIaWxsIFJhY2luZyAyLiBDaGVjayBpdCBvdXQhIiwiZGVzY3JpcHRpb24iOiJQbGF5IGFsbCBvZiB5b3VyIGZhdm9yaXRlIGdhbWVzIG9ubGluZSBmb3IgZnJlZSwgaW5jbHVkaW5nIFNvbGl0YWlyZSwgQ3Jvc3N3b3JkcywgV29yZCBHYW1lcyBhbmQgbW9yZSEiLCJpbWFnZUlkIjoiT0NHRS45bXc4cms2bmI2a3JfdjZfaGVybyJ9&ocid=cgshare-basic&cvid=9a4d554101654deb88a1488a21cf7c58&ei=179&cgfrom=cg_landing_L2_puzzle"target="_blank"> Play Now</a> </button>
+                    </div>
+                </div>
+                <div class="review-card adventure">
+                    <img src="./Assets/reviews/icon13.jpg"  height="60"  width="60" alt="User 13">
+                    <div class="review-content">
+                        <h3>Kate Lewis</h3>
+                        <div class="star-rating">★★★★★</div>
+                        <p>This adventure game is a masterpiece! Every level is a new surprise. Highly recommend for anyone who loves exploration.</p>
+                    </div>
+                    <div class="hover-card">
+                        <img src="./Assets/reviews/img13.webp"   alt="Game Image">
+                        <button> <a href="https://www.msn.com/en-in/play/games/9pk306zzrpr5/cg-9pk306zzrpr5?shared_event=eyJzaGFyZUlkIjoiMmE0ZjYyYjQtYjI4OS00ZTUyLTgxMzgtMTc2ZGExODEwYTFjIiwidGl0bGUiOiJJJ20gcGxheWluZyBVcCBIaWxsIFJhY2luZyAyLiBDaGVjayBpdCBvdXQhIiwiZGVzY3JpcHRpb24iOiJQbGF5IGFsbCBvZiB5b3VyIGZhdm9yaXRlIGdhbWVzIG9ubGluZSBmb3IgZnJlZSwgaW5jbHVkaW5nIFNvbGl0YWlyZSwgQ3Jvc3N3b3JkcywgV29yZCBHYW1lcyBhbmQgbW9yZSEiLCJpbWFnZUlkIjoiT0NHRS45bXc4cms2bmI2a3JfdjZfaGVybyJ9&ocid=cgshare-basic&cvid=9a4d554101654deb88a1488a21cf7c58&ei=194&cgfrom=cg_landing_L2_adventure"target="_blank"> Play Now</a> </button>
+                    </div>
+                </div>
+                <div class="review-card sports">
+                    <img src="./Assets/reviews/icon14.jpg"  height="60"  width="60" alt="User 14">
+                    <div class="review-content">
+                        <h3>Chris Taylor</h3>
+                        <div class="star-rating">★★★☆☆</div>
+                        <p>Good sports game, but needs more variety in teams and players. Still, a solid choice for sports fans.</p>
+                    </div>
+                    <div class="hover-card">
+                        <img src="./Assets/reviews/img14.webp" alt="Game Image">
+                        <button> <a href="https://www.msn.com/en-in/play/games/9nh8w63h2c6c/cg-9nh8w63h2c6c?shared_event=eyJzaGFyZUlkIjoiMmE0ZjYyYjQtYjI4OS00ZTUyLTgxMzgtMTc2ZGExODEwYTFjIiwidGl0bGUiOiJJJ20gcGxheWluZyBVcCBIaWxsIFJhY2luZyAyLiBDaGVjayBpdCBvdXQhIiwiZGVzY3JpcHRpb24iOiJQbGF5IGFsbCBvZiB5b3VyIGZhdm9yaXRlIGdhbWVzIG9ubGluZSBmb3IgZnJlZSwgaW5jbHVkaW5nIFNvbGl0YWlyZSwgQ3Jvc3N3b3JkcywgV29yZCBHYW1lcyBhbmQgbW9yZSEiLCJpbWFnZUlkIjoiT0NHRS45bXc4cms2bmI2a3JfdjZfaGVybyJ9&ocid=cgshare-basic&cvid=9a4d554101654deb88a1488a21cf7c58&ei=201&cgfrom=cg_landing_L2_sports"target="_blank">Play Now</a></button>
+                    </div>
+                </div>
+                <div class="review-card racing">
+                    <img src="./Assets/reviews/icon15.jpg"  height="60"  width="60" alt="User 15">
+                    <div class="review-content">
+                        <h3>Patricia White</h3>
+                        <div class="star-rating">★★★★★</div>
+                        <p>Awesome racing game! The graphics are breathtaking, and the controls are smooth and responsive. Definitely worth playing.</p>
+                    </div>
+                    <div class="hover-card">
+                        <img src="./Assets/reviews/img15.webp" alt="Game Image">
+                        <button> <a href="https://www.msn.com/en-in/play/games/9pnghvsshrqh/cg-9pnghvsshrqh?shared_event=eyJzaGFyZUlkIjoiMmE0ZjYyYjQtYjI4OS00ZTUyLTgxMzgtMTc2ZGExODEwYTFjIiwidGl0bGUiOiJJJ20gcGxheWluZyBVcCBIaWxsIFJhY2luZyAyLiBDaGVjayBpdCBvdXQhIiwiZGVzY3JpcHRpb24iOiJQbGF5IGFsbCBvZiB5b3VyIGZhdm9yaXRlIGdhbWVzIG9ubGluZSBmb3IgZnJlZSwgaW5jbHVkaW5nIFNvbGl0YWlyZSwgQ3Jvc3N3b3JkcywgV29yZCBHYW1lcyBhbmQgbW9yZSEiLCJpbWFnZUlkIjoiT0NHRS45bXc4cms2bmI2a3JfdjZfaGVybyJ9&ocid=cgshare-basic&cvid=9a4d554101654deb88a1488a21cf7c58&ei=207&cgfrom=cg_landing_L2_racing" target="_blank" > Play now</a></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script>
+            function filterReviews(category) {
+                const reviews = document.querySelectorAll('.review-card');
+                reviews.forEach(review => {
+                    if (category === 'all' || review.classList.contains(category)) {
+                        review.classList.remove('hidden');
+                    } else {
+                        review.classList.add('hidden');
+                    }
+                });
+            }
+    
+            function toggleReviewForm() {
+                const form = document.querySelector('.review-form');
+                form.style.display = form.style.display === 'none' || form.style.display === '' ? 'block' : 'none';
+            }
+    
+            function submitReview() {
+                const name = document.getElementById('reviewer-name').value;
+                const category = document.getElementById('review-category').value.toLowerCase();
+                const text = document.getElementById('review-text').value;
+                const rating = document.getElementById('review-rating').value;
+                const ratingStars = '★'.repeat(rating) + '☆'.repeat(5 - rating);
+    
+                if (name && category && text && rating) {
+                    const reviewCard = document.createElement('div');
+                    reviewCard.classList.add('review-card', category);
+    
+                    reviewCard.innerHTML = `
+                        <img src="https://via.placeholder.com/60" alt="User">
+                        <div class="review-content">
+                            <h3>${name}</h3>
+                            <div class="star-rating">${ratingStars}</div>
+                            <p>${text}</p>
+                        </div>
+                        <div class="hover-card">
+                            <img src="https://via.placeholder.com/800x400" alt="Game Image">
+                            <button>Play Now</button>
+                        </div>
+                    `;
+    
+                    document.querySelector('.review-page').appendChild(reviewCard);
+                    addHoverEffect(reviewCard);
+    
+                    document.getElementById('reviewer-name').value = '';
+                    document.getElementById('review-category').value = '';
+                    document.getElementById('review-text').value = '';
+                    document.getElementById('review-rating').value = '';
+                    toggleReviewForm();
+                } else {
+                    alert('Please fill out all fields');
+                }
+            }
+    
+            function addHoverEffect(card) {
+                card.addEventListener('mouseenter', () => {
+                    const hoverCard = card.querySelector('.hover-card');
+                    hoverCard.style.display = 'block';
+                    hoverCard.style.opacity = '1';
+                    hoverCard.style.transform = 'translateX(0)';
+                });
+    
+                card.addEventListener('mouseleave', () => {
+                    const hoverCard = card.querySelector('.hover-card');
+                    hoverCard.style.opacity = '0';
+                    hoverCard.style.transform = 'translateX(-10px)';
+                    setTimeout(() => {
+                        hoverCard.style.display = 'none';
+                    }, 300); // Match the transition duration
+                });
+            }
+    
+            document.querySelectorAll('.review-card').forEach(card => {
+                addHoverEffect(card);
+            });
+            function toggleMode() {
+                document.body.classList.toggle('light-mode');
+            }     
+            
+            function toggleBurgerMenu() {
+                    var menuContent = document.getElementById("burgerMenuContent");
+                    if (menuContent.style.display === "block") {
+                        menuContent.style.display = "none";
+                    } else {
+                        menuContent.style.display = "block";
+                    }
+                }
+        
+                function toggleMode() {
+                    var body = document.body;
+                    body.classList.toggle("dark-mode");
+                    body.classList.toggle("light-mode");
+                }
+        </script>
+    </body>
+    </html>
+    

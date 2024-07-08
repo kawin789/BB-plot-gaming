@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3D Hover Effect Cards</title>
+    <style>
+        body {
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-image: url(./Assets/bg.jpg);
+            background-size: cover;
+            
+        }
+
+        .container {
+            display: flex;
+            gap: 45px;
+            perspective: 1000px;
+        }
+
+        .card {
+            background-color: #f9a047b2;
+            width: 310px;
+            height: 500px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            border-radius: 10px;
+            box-shadow: 19px 4px 15px rgba(255, 255, 255, 0.642);
+            transition: transform 0.5s;
+            transform-style: preserve-3d;
+        }
+
+        .card:hover {
+            transform: rotateY(0deg) translateZ(100px);
+        }
+
+        .content {
+            padding: 20px;
+            backface-visibility: hidden;
+        }
+
+        .content {
+            background-color: #c2b9b3;
+            margin-top: -100%;
+            margin-left: -60%;
+        }
+
+         h2 {
+            margin: 0;
+            color: rgb(0, 0, 0);
+           
+        }
+        .pages {
+            background-color: #00000090;
+           display: flex;
+           flex-direction: column;
+           height: 200px;
+           margin-top: 30%;
+           padding: 15px;
+           
+        }
+        .pages a{
+            color: rgb(255, 255, 255);
+            margin-top: 5px;
+            
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        
+        <div class="card">
+            <div class="pages"><a href="./index.html">Welcome page</a><br><a href="./home.html">Home page</a><br><a href="./game.html">Games page</a><a href="./ar.html">Hand Gesture Games page</a><a href="./ai.html">AI page</a><a href="./signin.html">Sign UP/IN page</a><a href="./design.html">Designed by page</a></div>
+            <div class="content">
+                <h2>KAWIN M.S</h2>
+               
+            </div>
+        </div>
+        <div class="card">
+            <div class="pages"><a href="./card.html">Store page</a><a href="./video.html">Game Video page</a><a href="./contact.html">Contact page</a></div>
+            <div class="content">
+                <h2>JEYASHIRI S</h2>
+                
+            </div>
+        </div>
+        <div class="card">
+            <div class="pages"><a href="./reviews.html">Reviews page</a></div>
+            <div class="content">
+                <h2>MOUNIKA K</h2>
+               
+            </div>
+        </div>
+        <div class="card">
+            <div class="pages"><a href="./download.html">Download Page</a></div>
+            <div class="content">
+                <h2>KAVIYA P</h2>
+                
+            </div>
+        </div>
+    </div>
+</body>
+</html>

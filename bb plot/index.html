@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BB Plot</title>
+    <link rel="stylesheet" href="./style1.css">
+</head>
+<body>
+    <div class="background-gif"></div>
+    <div class="overlay"></div>
+    
+    <div class="welcome-container">
+        <div class="welcome-text">
+            <h1 id="welcome-message"></h1>
+        </div>
+        <img class="logo" src="./Assets/logo.png" alt="Website Logo">
+
+        <div class="buttons">
+            
+                <button ><a href="./signin.html">Sign In</a></button>
+                <button ><a href="./signup.html">Sign Up</a></button>
+             </div>
+
+        <div class="arrow-container">
+            <div class="arrow" onclick="scrollToHome()">
+                <a href="./home.html">
+                <img src="./Assets/arrow2.png" alt="Joystick Icon" height="70px" width="80px"></a>
+            </div>
+        </div>
+    </div>
+
+    <div id="home-page" class="home-page">
+        <a href="./home.html"></a>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', (event) => {
+            const messages = ["Welcome to BB Plot"];
+            let partIndex = 0;
+            let charIndex = 0;
+            const welcomeMessage = document.getElementById("welcome-message");
+
+            function type() {
+                if (charIndex < messages[partIndex].length) {
+                    welcomeMessage.textContent += messages[partIndex].charAt(charIndex);
+                    charIndex++;
+                    setTimeout(type, 100);
+                }
+            }
+
+            type();
+        });
+
+    
+
+        function signUp() {
+            alert("Sign Up clicked");
+        }
+
+        function signIn() {
+            alert("Sign In clicked");
+        }
+
+        function later() {
+            alert("Later clicked");
+        }
+    </script>
+</body>
+</html>

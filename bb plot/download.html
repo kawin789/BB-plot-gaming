@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Download Page</title>
+    <link rel="stylesheet" href="./style.css">
+    <style>
+        .sidebar {
+            width: 200px;
+            padding-right: 60px;
+            padding-left: 25px;
+            background: rgba(26, 26, 26, 0.9);
+            padding-bottom: 16%;
+            display: flex;
+            flex-direction: column;
+            gap: 100px;
+            overflow: hidden;
+        }
+        .sidebar h2 {
+            text-align: center;
+            color: orange;
+        }
+
+        .sidebar-link {
+            color: #000000;
+            text-decoration: none;
+            font-size: 28px;
+            cursor: pointer;
+            display: block;
+            padding: 30px;
+            position: relative;
+            overflow: hidden;
+            margin-top: 20px;
+        }
+
+        .sidebar-link::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 200%;
+            height: 100%;
+            background: orange;
+            transform: skewX(-30deg);
+            transition: left 0.3s ease;
+            z-index: 0;
+        }
+
+        .sidebar-link:hover::before{
+            left: 100%;
+        }
+
+        .sidebar-link:hover {
+            color: #fff;
+        }
+        .sidebar-link span {
+            position: relative;
+            z-index: 1;
+        }
+
+        .main-content {
+            margin-left: 20%;
+            margin-top: -53%;
+            flex: 1;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 50px;
+            padding: 20px;
+            justify-content: center;
+        }
+
+        .game-card {
+            background-color: #3c3c3c5b;
+            width: calc(33.333% - 40px);
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            border-radius: 10px;
+            position: relative;
+            transition: transform 0.3s, box-shadow 0.3s;
+            transform-style: preserve-3d;
+        }
+
+        .game-card:hover {
+        
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+        }
+
+        .game-thumbnail {
+            width: 150px;
+            height: 150px;
+            background-color: #cfcfcf;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.3s;
+        }
+
+        .game-title {
+            margin-bottom: 10px;
+        }
+
+        .download-button {
+            padding: 10px 20px;
+            background-color: #ff9800;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .download-button a{
+            text-decoration: none;
+            color: white;
+        }
+        .download-button:hover{
+            transform: translateY(-10px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+        }
+
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body class="dark-mode">
+    <div class="header">
+        <div class="logo-section">
+            <img src="./Assets/logo.png" alt="BB Gaming Logo">
+            <h1>BB Plot</h1>
+            <br><br>
+            <p>"I'm not addicted to gaming,<br> I'm committed to it."</p>
+        </div>
+        <div class="navbar">
+            <a href="./home.html" class="parallelogram">Home</a>
+            <a href="./game.html" class="parallelogram">Online Games</a>
+            <a href="./download.html" class="parallelogram">Downloads</a>
+            <a href="./reviews.html" class="parallelogram">Reviews</a>
+            <a href="./video.html" class="parallelogram">Game Video</a>
+            <a href="./card.html" class="parallelogram">Store</a>
+            <a href="./ar.html" class="parallelogram">HG Game</a>
+            <a href="./ai.html" class="parallelogram">AI</a>
+            <div class="mode-toggle" onclick="toggleMode()">🌓</div>
+            <div class="burger-menu" onclick="toggleBurgerMenu()">&#9776;</div>
+        </div>
+        <div id="burgerMenuContent" class="burger-menu-content">
+            <a href="./home.html">Home</a>
+            <a href="./game.html">Online Games</a>
+            <a href="./download.html">Downloads</a>
+            <a href="./reviews.html">Reviews</a>
+            <a href="./video.html">Play Video</a>
+            <a href="./card.html">Store</a>
+            <a href="./ar.html">AR game</a>
+            <a href="./ai.html">AI</a>
+        </div>
+        <div class="user-menu">
+            <button class="parallelogram"><img src="./Assets/user.png" alt="User"></button>
+            <div class="user-menu-content">
+                <a href="./signin.html">Sign In</a>
+                <a href="./signup.html">Sign up</a>
+                <a href="#logout">Logout</a>
+                <a href="./contact.html">Contact</a>
+            </div>
+        </div>
+    </div>
+    <div class="sidebar">
+        <h2>Game Mode</h2>
+        <div class="sidebar-link" onclick="showContent('pc')"><span>PC</span></div>
+        <div class="sidebar-link" onclick="showContent('phones')"><span>Phones</span></div>
+        <div class="sidebar-link" onclick="showContent('tablets')"><span>Tablets</span></div>
+    </div>
+    <div class="main-content">
+        <!-- PC Games -->
+        <div class="game-card pc">
+            <img src="./Assets/freegames/pc1.jpg" alt="PC Game 1" class="game-thumbnail">
+            
+            <div class="download-button"><a href="https://play.google.com/store/apps/details?id=com.gameloft.android.ANMP.GloftA9HM&pcampaignid=web_share">Download</a></div>
+        </div>
+        <div class="game-card pc">
+            <img src="./Assets/freegames/pc2.jpg" alt="PC Game 2" class="game-thumbnail">
+            
+            <div class="download-button"><a href="https://play.google.com/store/apps/details?id=com.wb.goog.mkx&pcampaignid=web_share">Download</a></div>
+        </div>
+        <div class="game-card pc">
+            <img src="./Assets/freegames/pc3.jpg" alt="PC Game 3" class="game-thumbnail">
+          
+            <div class="download-button"><a href="https://play.google.com/store/apps/details?id=net.apex_designs.payback2&pcampaignid=web_share">Download</a></div>
+        </div>
+        <div class="game-card pc">
+            <img src="./Assets/freegames/pc4.jpg" alt="PC Game 4" class="game-thumbnail">
+          
+            <div class="download-button"><a href="https://play.google.com/store/apps/details?id=com.ea.game.nfs14_row&pcampaignid=web_share">Download</a></div>
+        </div>
+        <div class="game-card pc">
+            <img src="./Assets/freegames/pc5.jpg" alt="PC Game 5" class="game-thumbnail">
+           
+            <div class="download-button"><a href="https://play.google.com/store/apps/details?id=com.nekki.shadowfightarena&pcampaignid=web_share">Download</a></div>
+        </div>
+        <div class="game-card pc">
+            <img src="./Assets/freegames/pc6.jpg" alt="PC Game 6" class="game-thumbnail">
+            
+            <div class="download-button"><a href="https://play.google.com/store/apps/details?id=com.activision.callofduty.warzone&pcampaignid=web_share">Download</a></div>
+        </div>
+
+        <!-- Phone Games -->
+        <div class="game-card phones hidden">
+            <img src="./Assets/freegames/ph1.jpg" alt="Phone Game 1" class="game-thumbnail">
+           
+            <div class="download-button"><a href="https://play.google.com/store/apps/details?id=com.pubg.imobile&pcampaignid=web_share">Download</a></div>
+        </div>
+        <div class="game-card phones hidden">
+            <img src="./Assets/freegames/ph2.jpg" alt="Phone Game 2" class="game-thumbnail">
+            
+            <div class="download-button"><a href="https://play.google.com/store/apps/details?id=com.outfit7.mytalkingtomfriends&pcampaignid=web_share">Download</a></div>
+        </div>
+        <div class="game-card phones hidden">
+            <img src="./Assets/freegames/ph3.jpg" alt="Phone Game 3" class="game-thumbnail">
+          
+            <div class="download-button"><a href="https://play.google.com/store/search?q=free+fire&c=apps&androidId=102226224948239993074&hl=en-IN">Download</a></div>
+        </div>
+        <div class="game-card phones hidden">
+            <img src="./Assets/freegames/ph4.jpg" alt="Phone Game 4" class="game-thumbnail">
+          
+            <div class="download-button"><a href="https://play.google.com/store/apps/details?id=com.kiloo.subwaysurf&pcampaignid=web_share">Download</a></div>
+        </div>
+        <div class="game-card phones hidden">
+            <img src="./Assets/freegames/ph5.webp" alt="Phone Game 5" class="game-thumbnail">
+            
+            <div class="download-button"><a href="https://play.google.com/store/apps/details?id=com.ludo.king&pcampaignid=web_share">Download</a></div>
+        </div>
+        <div class="game-card phones hidden">
+            <img src="./Assets/freegames/ph6.jpg" alt="Phone Game 6" class="game-thumbnail">
+            
+            <div class="download-button"><a href="https://play.google.com/store/apps/details?id=com.imangi.templerun2&pcampaignid=web_share">Download</a></div>
+        </div>
+
+        <!-- Tablet Games -->
+        <div class="game-card tablets hidden">
+            <img src="./Assets/freegames/tb1.png" alt="Tablet Game 1" class="game-thumbnail">
+            
+            <div class="download-button"><a href="https://play.google.com/store/apps/details?id=com.foxnextgames.m3&pcampaignid=web_share">Download</a></div>
+        </div>
+        <div class="game-card tablets hidden">
+            <img src="./Assets/freegames/tb2.jpg" alt="Tablet Game 2" class="game-thumbnail">
+            
+            <div class="download-button"><a href="https://play.google.com/store/apps/details?id=com.zuuks.truck.simulator.euro&pcampaignid=web_share">Download</a></div>
+        </div>
+        <div class="game-card tablets hidden">
+            <img src="./Assets/freegames/tb3.png" alt="Tablet Game 3" class="game-thumbnail">
+            
+            <div class="download-button"><a href="https://play.google.com/store/apps/details?id=com.mayhem.ugw&pcampaignid=web_share">Download</a></div>
+        </div>
+        <div class="game-card tablets hidden">
+            <img src="./Assets/freegames/tb4.jpg" alt="Tablet Game 4" class="game-thumbnail">
+            
+            <div class="download-button"><a href="https://play.google.com/store/apps/details?id=com.mobirix.mbtm&pcampaignid=web_share">Download</a></div>
+        </div>
+        <div class="game-card tablets hidden">
+            <img src="./Assets/freegames/tb5.jpg" alt="Tablet Game 5" class="game-thumbnail">
+           
+            <div class="download-button"><a href="https://play.google.com/store/apps/details?id=com.timuzgames.bikeracing2018&pcampaignid=web_share">Download</a></div>
+        </div>
+        <div class="game-card tablets hidden">
+            <img src="./Assets/freegames/tb6.webp" alt="Tablet Game 6" class="game-thumbnail">
+            
+            <div class="download-button"><a href="https://play.google.com/store/apps/details?id=com.generagames.resistance&pcampaignid=web_share">Download</a></div>
+        </div>
+    </div>
+
+    <script>
+        function showContent(type) {
+            const allCards = document.querySelectorAll('.game-card');
+            allCards.forEach(card => card.classList.add('hidden'));
+
+            const selectedCards = document.querySelectorAll('.' + type);
+            selectedCards.forEach(card => card.classList.remove('hidden'));
+        }
+        function toggleMode() {
+            document.body.classList.toggle('light-mode');
+        }     
+        
+        function toggleBurgerMenu() {
+                var menuContent = document.getElementById("burgerMenuContent");
+                if (menuContent.style.display === "block") {
+                    menuContent.style.display = "none";
+                } else {
+                    menuContent.style.display = "block";
+                }
+            }
+    
+            function toggleMode() {
+                var body = document.body;
+                body.classList.toggle("dark-mode");
+                body.classList.toggle("light-mode");
+            }
+    </script>
+</body>
+</html>
